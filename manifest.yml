@@ -1,9 +1,9 @@
 applications:
-- name: SurveyDesignTool
-  memory: 800M
+- name: NARSDataDownloadTool
+  memory: 500M
   routes:
-    - route: Survey_Design_Tool.app.cloud.gov
-  disk_quota: 2G
+    - route: NARS_Data_Tool.app.cloud.gov
+  disk_quota: 500M
   buildpacks:
     - r_buildpack
   command: R -f shiny.R
