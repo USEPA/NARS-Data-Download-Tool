@@ -1,8 +1,8 @@
 packages <- c("shiny", "openxlsx", "dplyr", "readr", "DT", "bslib", "shinybusy", "shinyhelper", "shinyjs", "shinyalert")
-installed_packages <- packages %in% rownames(installed.packages())
-if (any(installed_packages == FALSE)) {
-  install.packages(packages[!installed_packages])
-}
+#installed_packages <- packages %in% rownames(installed.packages())
+#if (any(installed_packages == FALSE)) {
+#  install.packages(packages[!installed_packages])
+#}
 
 # Packages loading
 lapply(packages, library, character.only = TRUE)
@@ -1440,7 +1440,7 @@ server <-function(input, output, session) {
       ))
   })
   
-  session$onSessionEnded(stopApp)
+  #session$onSessionEnded(stopApp)
 }
 
 # shinyApp()
