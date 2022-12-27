@@ -1,4 +1,4 @@
-# NARS-Data-Download-Tool
+# NARS Data Download Tool
 
 ### Disclaimer
 
