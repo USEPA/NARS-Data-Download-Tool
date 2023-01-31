@@ -97,7 +97,7 @@ site2007 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="WSA_ECO3", "Ag
 
 # EPA Template ----
 
-ui <- fixedPage(tags$html(class = "no-js", lang="en"),
+ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                 tags$head(
                   HTML(
                     "<!-- Google Tag Manager -->
@@ -338,8 +338,10 @@ ui <- fixedPage(tags$html(class = "no-js", lang="en"),
                                            actionLink("sidebar_button","", icon = icon("bars")))),
                            id = "navbar",
                            div(class="sidebar", 
-                               sidebarPanel(width = 4,
+                               sidebarPanel(width = 3,
                                         #Survey Input
+                                        fluidRow(
+                                          column(6,
                                         selectInput(inputId = "Survey",
                                                     label = strong("Select Survey"),
                                                     choices = c("Lakes (NLA)"="nla", "Rivers and Streams (NRSA)"="nrsa", 
@@ -371,7 +373,10 @@ ui <- fixedPage(tags$html(class = "no-js", lang="en"),
                                                  icon = "circle-question",
                                                  content = c("The four National Aquatic Resource Surveys are conducted on a five-year cycle with the Streams and Rivers survey requiring 
                                                              two years to complete."),
-                                                 size = "s", easyClose = TRUE, fade = TRUE),
+                                                 size = "s", easyClose = TRUE, fade = TRUE)
+                                        )),
+                                        fluidRow(
+                                          column(8,
                                         conditionalPanel(
                                           condition = "input.Survey == 'ncca' & input.Year == '2015'",
                                           radioButtons(inputId = "NCCA_Type",
@@ -432,6 +437,7 @@ ui <- fixedPage(tags$html(class = "no-js", lang="en"),
                                         # Press button for analysis 
                                         actionButton("goButton", strong("Assemble/Update Dataset"), 
                                                      style = "background-color:#337ab7; font-weight: bold; font-size: 20px")
+                           ))
                            )),#sidebarPanel
                            tabPanel(title=span('NARS Data',
                                                style = "font-weight: bold; font-size: 30px;"),
@@ -1226,28 +1232,16 @@ server <-function(input, output, session) {
   })
   
   output$table <- renderDataTable({
-    
     DT::datatable(
-      
       Data(), 
       filter = list(position = 'top'),
-      #callback=JS('$("button.buttons-copy").css("background","#337ab7").css("color", "#fff");
-      #             $("button.buttons-csv").css("background","#337ab7").css("color", "#fff");
-      #             $("button.buttons-excel").css("background","#337ab7").css("color", "#fff");
-      #             $("button.buttons-pdf").css("background","#337ab7").css("color", "#fff");
-      #             return table;'),
-      #extensions = c("Buttons"),
       rownames = FALSE,
-      options = list(#dom = 'Bflrtip',
-                    autowidth = TRUE,
-                    scrollX = TRUE,
-                    searchHighlight = TRUE)
-                    # buttons = list(
-                    #   list(extend = 'copy', filename = paste0(datatitle())),
-                    #   list(extend = 'csv', filename = paste0(datatitle())),
-                    #   list(extend = 'excel', filename = paste0(datatitle())))
-                )
-      })
+      options = list(
+        autowidth = TRUE,
+        scrollX = TRUE,
+        searchHighlight = TRUE)
+    )
+  })
   
   output$dwnldcsv <- downloadHandler(
     filename = function() {
