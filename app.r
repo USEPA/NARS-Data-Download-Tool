@@ -1,6 +1,6 @@
 packages <- c("shiny", "openxlsx", "dplyr", "readr", "DT", "bslib", "shinybusy", "shinyhelper", "shinyjs", "shinyalert")
 #installed_packages <- packages %in% rownames(installed.packages())
-#if (any(installed_packages == FALSE)) {
+#if(any(installed_packages == FALSE)) {
 #  install.packages(packages[!installed_packages])
 #}
 
@@ -11,9 +11,9 @@ lapply(packages, library, character.only = TRUE)
 state_name <- as.character(c(state.abb, "AS", "GU", "MP"))
 
 # Indicators ----
-choices1819 <- c("Algal Toxin"="algal_toxin", "Benthic Macroinvertebrate Count"="benthic_macroinvertebrate_count", "Benthic Macroinvertebrate Metrics"="benthic_macroinvertebrate_metrics", 
-                 "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs", "Physical Habitat Metrics"="physical_habitat_larger_set_of_metrics", "Site Information"="site-information", 
-                 "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
+choices1819 <- c("Algal Toxin"="algal_toxin", "Benthic Macroinvertebrate Count"="benthic_macroinvertebrate_count", "Benthic Macroinvertebrate Metrics"="benthic_macroinvertebrate_metrics", "Enterococci"="enterococci_0",
+                 "Field Chemistry Measures"="field_wide", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs", "Fish Sampling Info"="fish-sampling-information", "Fish Count"="fish-count", "Fish Metrics"="fish-metrics", 
+                 "Landscape Data"="landscape", "Periphyton Biomass"="pbio_0", "Periphyton/Chlorophyll a"="PeriChla", "Physical Habitat Metrics"="physical_habitat_larger_set_of_metrics", "Site Information"="SiteInfo", "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
 
 choices2017 <- c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Benthic Macroinvertebrate Count"="benthic_count", "Benthic Macroinvertebrate Metrics"="benthic_metrics", 
                  "E. Coli"="e.coli", "Hydrographic Profile"="profile", "Physical Habitat"="phab", "Secchi Depth"="secchi", "Phytoplankton Count"="phytoplankton_count", "Sediment Chemistry"="sediment_chemistry", 
@@ -332,6 +332,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
 	tags$style(HTML('.navbar-nav > li > a, .navbar-brand {
                    padding-top: 10px !important; 
                    height: 40px;
+                   line-height: 1;
                  }')),
 	        suppressWarnings(
                 navbarPage(title = tagList(span("NARS Data Download Tool", style = "padding: 10px; font-weight: bold; font-size: 35px",
@@ -376,7 +377,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                  size = "s", easyClose = TRUE, fade = TRUE)
                                         )),
                                         fluidRow(
-                                          column(8,
+                                          column(9,
                                         conditionalPanel(
                                           condition = "input.Survey == 'ncca' & input.Year == '2015'",
                                           radioButtons(inputId = "NCCA_Type",
@@ -390,7 +391,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                     choices = "",
                                                     selected = NULL,
                                                     multiple = FALSE, 
-                                                    width = "300px") %>%
+                                                    width = "350px") %>%
                                           #Indicator helper
                                           helper(type = "inline",
                                                  icon = "circle-question",
@@ -426,7 +427,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                       choices = "",
                                                       selected = NULL,
                                                       multiple = TRUE, 
-                                                      width = "300px") %>%
+                                                      width = "350px") %>%
                                             #Site Information helper
                                             helper(type = "inline",
                                                    icon = "circle-question",
@@ -440,7 +441,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                            ))
                            )),#sidebarPanel
                            tabPanel(title=span('NARS Data',
-                                               style = "font-weight: bold; font-size: 30px;"),
+                                               style = "font-weight: bold; font-size: 35px;"),
                                     icon = icon('database'),
                                     value="narsdata",
                                     mainPanel(
@@ -467,7 +468,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                       DT::dataTableOutput("table"), style = "font-weight:bold; font-size:90%;")
                            ),#MetaData tabPanel
                            tabPanel(title=span("Metadata",
-                                         style = "font-weight: bold; font-size: 30px"),
+                                         style = "font-weight: bold; font-size: 35px"),
                                     icon = icon('clipboard-question'),
                                     value="metadata",
                                     mainPanel(
@@ -477,11 +478,13 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                     span(h3(strong("Export Data As:")), style = "color:#337ab7")),
                                       DT::dataTableOutput("metatable"))
                            ),#About tabPanel
+                           tags$head(tags$style(HTML("about{ align:far-right; }"))),
                            tabPanel(value="about",
+                                    class="about",
                                     icon = icon('message'),
                                     verify_fa = FALSE,
                                     span("About",
-                                         style = "font-weight: bold; font-size: 30px; font-style:italic;"),
+                                         style = "font-weight: bold; font-size: 35px; font-style:italic;"),
                                     )#About tabPanel
                  )#navbar
 	        )#suppressWarnings
@@ -902,14 +905,23 @@ server <-function(input, output, session) {
       need(input$State, 'Select State(s) of Interest!'))
     
     show_modal_spinner(spin = 'flower', text = 'Assembling Dataset.')
-    ### 2018/19----
-    if (input$Survey == "nrsa" & input$Year == "1819") {
-      if(input$Indicator == "site-information") {
-        Data <- read_csv('https://www.epa.gov/system/files/other-files/2022-01/nrsa-1819-site-information-data-updated.csv')
-      } else {
-        Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_', input$Year,'_',input$Indicator,'_-_data.csv'))
-      }
+   ### 2018/19----
+    if(input$Survey == "nrsa" & input$Year == "1819") {
+      if(input$Indicator == "SiteInfo") {
+          Data <- read_csv('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_SiteInfo.csv')
+        } else if(input$Indicator %in% c("fish-sampling-information", "fish-count", "fish-metrics")) {
+          Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2022-03/nrsa-1819-',input$Indicator,'-data.csv'))
+        } else if(input$Indicator %in% c("pbio_0", "PeriChla", "landscape", "enterococci_0")){
+          Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_',input$Indicator,'.csv'))
+        } else if(input$Indicator == "field_wide"){
+          colnames <- c("UID", colnames(read_csv('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_field_wide.csv', col_select = -c(1:2))))
+          Data <- read_csv('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_field_wide.csv', col_select = -c(1), skip = 1)
+          names(Data) <- colnames
+        } else {
+          Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_', input$Year,'_',input$Indicator,'_-_data.csv'))
+        }
       
+    
       if(input$State != "All States" || length(input$State) > 1) {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
@@ -918,14 +930,14 @@ server <-function(input, output, session) {
           Data <- Data %>%
             filter(STATE %in% input$State)
         } else{
-          siteinfo1819 <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2022-01/nrsa-1819-site-information-data-updated.csv')) %>% 
+          siteinfo1819 <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_SiteInfo.csv')) %>% 
             select(UID, SITE_ID, VISIT_NO, PSTL_CODE)
           Data <- left_join(Data, siteinfo1819) %>%
             filter(PSTL_CODE %in% input$State) %>% relocate(PSTL_CODE, .after = VISIT_NO)
         }
       }
-      if(input$Indicator != "site-information") {
-        siteinfo <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2022-01/nrsa-1819-site-information-data-updated.csv')) %>%
+      if(input$Indicator != "SiteInfo") {
+        siteinfo <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_SiteInfo.csv')) %>%
           select(UID, LAT_DD83, LON_DD83, input$SiteInfo)
         Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = VISIT_NO)
       }
@@ -1262,12 +1274,25 @@ server <-function(input, output, session) {
     if (input$Survey == "nrsa" & input$Year == "1819") {
       if(input$Indicator == "mercury_in_fish_tissue_plugs") {
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_', input$Year,'_',input$Indicator,'_-_metadata_.txt'))
-      } else if(input$Indicator == "site-information") {
-        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2022-01/nrsa-1819-site-information-metadata-updated.txt')
+      } else if(input$Indicator == "SiteInfo") {
+        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-01/NRSA18_19_Site_Information_Metadata.txt')
+      } else if(input$Indicator %in% c("fish-sampling-information", "fish-count", "fish-metrics")) {
+        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2022-03/nrsa-1819-',input$Indicator,'-metadata.txt'))
+      } else if(input$Indicator == "pbio_0"){
+        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-01/NRSA18_19_pbio_Metadata.txt')  
+      } else if(input$Indicator == "PeriChla"){
+        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-01/nrsa1819_PeriChla.txt')  
+      } else if(input$Indicator == "landscape"){
+        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_Landscape_metadata.txt')  
+      } else if(input$Indicator == "enterococci_0"){
+        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-01/nrsa1819_enterococci_metadata.txt')
+      } else if(input$Indicator == "field_wide"){
+        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-01/nrsa1819_field_newUid.txt')  
       } else {
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_', input$Year,'_',input$Indicator,'_-_metadata.txt'))
       }
     }
+    
     ### 2017----
     if(input$Survey == "nla" & input$Year == "2017") {
       
