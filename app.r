@@ -4,8 +4,11 @@ packages <- c("shiny", "openxlsx", "dplyr", "readr", "DT", "bslib", "shinybusy",
 #  install.packages(packages[!installed_packages])
 #}
 
+
 # Packages loading
 lapply(packages, library, character.only = TRUE)
+
+addResourcePath(prefix = 'www', directoryPath = './www')
 
 
 state_name <- as.character(c(state.abb, "AS", "GU", "MP"))
@@ -326,14 +329,30 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
 	tags$head(
 	  tags$style(HTML("
                   a.action-button {
-                    color: #00ff00;
-                  }"))
-	),
-	tags$style(HTML('.navbar-nav > li > a, .navbar-brand {
+                    color: #00ff00;}
+                  
+                  .navbar-nav > li > a, .navbar-brand {
                    padding-top: 10px !important; 
-                   height: 40px;
-                   line-height: 1;
-                 }')),
+                   height: 60px;
+                   line-height: 1;}
+                  
+                  navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	                  color: #18BC9C;
+	                  background-color: #2C3E50;
+	                  padding-bottom: 10px;}
+                  
+                  .sweet-alert {
+	                  max-height: calc(100% - 20px);
+	                  top: 60%;}
+                  
+                  .shiny-output-error-validation {color: #ff0000; font-weight: bold;}
+                  
+                  .dataTables_scrollBody {transform:rotateX(180deg);}
+                  .dataTables_scrollBody table {transform:rotateX(180deg);}
+                  
+                  .has-feedback .form-control { padding-right: 0px;}
+                  "))
+      	),
 	        suppressWarnings(
                 navbarPage(title = tagList(span("NARS Data Download Tool", style = "padding: 10px; font-weight: bold; font-size: 35px",
                                            actionLink("sidebar_button","", icon = icon("bars")))),
@@ -342,14 +361,14 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                sidebarPanel(width = 3,
                                         #Survey Input
                                         fluidRow(
-                                          column(6,
+                                          column(7,
                                         selectInput(inputId = "Survey",
                                                     label = strong("Select Survey"),
-                                                    choices = c("Lakes (NLA)"="nla", "Rivers and Streams (NRSA)"="nrsa", 
+                                                    choices = c("Rivers and Streams (NRSA)"="nrsa", "Lakes (NLA)"="nla", 
                                                                 "Coastal (NCCA)"="ncca", "Wetlands (NWCA)"="nwca"),
                                                     selected = NULL,
                                                     multiple = FALSE, 
-                                                    width = "200px") %>%
+                                                    width = "230px") %>%
                                           #Survey helper
                                           helper(type = "inline",
                                                  icon = "circle-question",
@@ -367,7 +386,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                     choices = "",
                                                     selected = NULL,
                                                     multiple = FALSE, 
-                                                    width = "200px") %>%
+                                                    width = "230px") %>%
                                           #Survey helper
                                           helper(type = "inline",
                                                  title = "NARS Survey Year",
@@ -412,7 +431,8 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                     width = "200px"),
                                         #Site Information Input
                                         conditionalPanel(
-                                          condition = "input.Indicator !== 'site-information' &
+                                          condition = "input.Indicator !== 'SiteInfo' &
+                                                       input.Indicator !== 'site-information' &
                                                        input.Indicator !== 'site_information' &
                                                        input.Indicator !== 'siteinformation_wide' &
                                                        input.Indicator !== 'wide_siteinfo' &
@@ -445,9 +465,6 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                     icon = icon('database'),
                                     value="narsdata",
                                     mainPanel(
-                                      
-                                      tags$style(HTML(".shiny-output-error-validation {color: #ff0000; font-weight: bold;}")),
-                                      
                                       conditionalPanel(condition = 'output.table',
                                                        column(12, offset=2,
                                                               span(h2(textOutput("datatitle")))),
@@ -461,10 +478,6 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                                                border-radius:2px;
                                                                                font-size:16px;")),
                                       br(),
-                                      tags$head(tags$style(HTML( 
-                                        ".dataTables_scrollBody {transform:rotateX(180deg);}
-                                         .dataTables_scrollBody table {transform:rotateX(180deg);}"))),
-                                      tags$head(tags$style(HTML( '.has-feedback .form-control { padding-right: 0px;}' ))),
                                       DT::dataTableOutput("table"), style = "font-weight:bold; font-size:90%;")
                            ),#MetaData tabPanel
                            tabPanel(title=span("Metadata",
@@ -478,7 +491,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                     span(h3(strong("Export Data As:")), style = "color:#337ab7")),
                                       DT::dataTableOutput("metatable"))
                            ),#About tabPanel
-                           tags$head(tags$style(HTML("about{ align:far-right; }"))),
+                           #tags$head(tags$style(HTML("#about{ position:right; }"))),
                            tabPanel(value="about",
                                     class="about",
                                     icon = icon('message'),
@@ -678,8 +691,8 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
 server <-function(input, output, session) {
   observe_helpers()
   
-
   shinyalert("Welcome to the NARS Data Download Tool!", 
+             imageUrl ='www/NARS_logo_sm.jpg',
              paste("Use the dropdown menus to explore available datasets collected in the", 
                     a(href="https://www.epa.gov/national-aquatic-resource-surveys/data-national-aquatic-resource-surveys", "National Aquatic Resource Surveys (NARS).", target="_blank"),
                     "Users have the option to filter the data by state(s) of interest and join site information to selected datasets.",
@@ -689,12 +702,15 @@ server <-function(input, output, session) {
                     "to understand the types of data available and how they were collected or measured. Users are also encouraged to read 
                      and leverage the EPA survey reports developed from these data that highlight national and regional assessments."),
              closeOnClickOutside = TRUE,
+             imageWidth = '300',
+             imageHeight = '300',
              html = TRUE
   )
   
   observe({
     if(req(input$navbar=="about")){
-      shinyalert("NARS Data Download Tool", 
+      shinyalert("NARS Data Download Tool",
+                 imageUrl ='www/NARS_logo_sm.jpg',
                  paste("Use the dropdown menus to explore available datasets collected in the", 
                      a(href="https://www.epa.gov/national-aquatic-resource-surveys/data-national-aquatic-resource-surveys", "National Aquatic Resource Surveys (NARS).", target="_blank"),
                      "Users have the option to filter the data by state(s) of interest and join site information to selected datasets.",
@@ -704,6 +720,8 @@ server <-function(input, output, session) {
                      "to understand the types of data available and how they were collected or measured. Users are also encouraged to read 
                      and leverage the EPA survey reports developed from these data that highlight national and regional assessments."),
                closeOnClickOutside = TRUE,
+               imageWidth = '300',
+               imageHeight = '300',
                html = TRUE
       )
       
@@ -1263,6 +1281,7 @@ server <-function(input, output, session) {
         write.csv(Data(), file, row.names = FALSE)
       }
     )
+
       
   ## Metadata Extract ----
   MetaData <- eventReactive(input$goButton, { 
@@ -1279,7 +1298,7 @@ server <-function(input, output, session) {
       } else if(input$Indicator %in% c("fish-sampling-information", "fish-count", "fish-metrics")) {
         MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2022-03/nrsa-1819-',input$Indicator,'-metadata.txt'))
       } else if(input$Indicator == "pbio_0"){
-        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-01/NRSA18_19_pbio_Metadata.txt')  
+        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-02/nrsa1819_pbio_metadata.txt')  
       } else if(input$Indicator == "PeriChla"){
         MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-01/nrsa1819_PeriChla.txt')  
       } else if(input$Indicator == "landscape"){
