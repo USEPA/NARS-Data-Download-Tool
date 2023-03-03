@@ -406,7 +406,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                        inline=TRUE)),
                                         #Indicator Input
                                         selectInput(inputId = "Indicator",
-                                                    label = strong(HTML("Select Indicator Dataset <br/> of Interest")),
+                                                    label = strong(HTML("Select NARS Dataset <br/> of Interest")),
                                                     choices = "",
                                                     selected = NULL,
                                                     multiple = FALSE, 
@@ -452,7 +452,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                             helper(type = "inline",
                                                    icon = "circle-question",
                                                    title = "Site Information",
-                                                   content = c("Choose 'Site Information' to add to each Indicator dataset. Site Information and metadata can be found by viewing the 
+                                                   content = c("Choose 'Site Information' to add to each dataset. Site Information and metadata can be found by viewing the 
                                                                'Site Information' under the Indicator of Interest dropdown."),
                                                    size = "s", easyClose = TRUE, fade = TRUE)),#end of siteinfo condPanel
                                         # Press button for analysis 
@@ -491,7 +491,6 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                     span(h3(strong("Export Data As:")), style = "color:#337ab7")),
                                       DT::dataTableOutput("metatable"))
                            ),#About tabPanel
-                           #tags$head(tags$style(HTML("#about{ position:right; }"))),
                            tabPanel(value="about",
                                     class="about",
                                     icon = icon('message'),
@@ -673,7 +672,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
               </li>
             </ul>
             <p class="footer__last-updated">
-              Last updated on March 30, 2022
+              Last updated on February 02, 2023
             </p>
           </div>
         </div>
@@ -688,6 +687,8 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
     </a>'
 	)
 )#fluidPage
+
+
 server <-function(input, output, session) {
   observe_helpers()
   
