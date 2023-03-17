@@ -1,12 +1,22 @@
-packages <- c("shiny", "openxlsx", "dplyr", "readr", "DT", "bslib", "shinybusy", "shinyhelper", "shinyjs", "shinyalert")
+#packages <- c("shiny", "openxlsx", "XLConnect", "dplyr", "readr", "DT", "bslib", "shinybusy", "shinyhelper", "shinyjs", "shinyalert")
 #installed_packages <- packages %in% rownames(installed.packages())
 #if(any(installed_packages == FALSE)) {
 #  install.packages(packages[!installed_packages])
 #}
 
-
 # Packages loading
-lapply(packages, library, character.only = TRUE)
+#lapply(packages, library, character.only = TRUE)
+library(shiny)
+library(openxlsx)
+library(XLConnect)
+library(dplyr)
+library(readr)
+library(DT)
+library(bslib)
+library(shinybusy)
+library(shinyhelper)
+library(shinyjs)
+library(shinyalert)
 
 addResourcePath(prefix = 'www', directoryPath = './www')
 
@@ -358,7 +368,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                            actionLink("sidebar_button","", icon = icon("bars")))),
                            id = "navbar",
                            div(class="sidebar", 
-                               sidebarPanel(width = 3,
+                               sidebarPanel(#width = 3,
                                         #Survey Input
                                         fluidRow(
                                           column(7,
@@ -391,8 +401,8 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                           helper(type = "inline",
                                                  title = "NARS Survey Year",
                                                  icon = "circle-question",
-                                                 content = c("The four National Aquatic Resource Surveys are conducted on a five-year cycle with the Streams and Rivers survey requiring 
-                                                             two years to complete."),
+                                                 content = c("The four National Aquatic Resource Surveys are conducted on a five-year cycle with the Streams 
+                                                             and Rivers survey requiring two years to complete."),
                                                  size = "s", easyClose = TRUE, fade = TRUE)
                                         )),
                                         fluidRow(
@@ -416,9 +426,10 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                  icon = "circle-question",
                                                  title = "Survey Indicators",
                                                  content = c("NARS collects data on key indicators of biological, chemical and physical condition. 
-                                                             These indicators are used to assess ecological and condition and to examine conditions 
+                                                             These indicators are used to assess ecological condition and to examine conditions 
                                                              that may negatively influence or affect stream condition (i.e. stressors).",
-                                                             "Metadata for each Indicator file can be found by navigating to the Metadata tab."),
+                                                             "Metadata for each NARS dataset file can be found by navigating to the Metadata tab. If 
+                                                             downloading dataset an a .XLSX file, metadata will be stored as seperate sheet."),
                                                  size = "s", easyClose = TRUE, fade = TRUE),
                                         #State Input
                                       #  conditionalPanel(
@@ -428,7 +439,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                     choices = c("Choose State(s)"="", "All States", state_name),
                                                     selected = NULL,
                                                     multiple = TRUE, 
-                                                    width = "200px"),
+                                                    width = "350px"),
                                         #Site Information Input
                                         conditionalPanel(
                                           condition = "input.Indicator !== 'SiteInfo' &
@@ -452,8 +463,8 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                             helper(type = "inline",
                                                    icon = "circle-question",
                                                    title = "Site Information",
-                                                   content = c("Choose 'Site Information' to add to each dataset. Site Information and metadata can be found by viewing the 
-                                                               'Site Information' under the Indicator of Interest dropdown."),
+                                                   content = c("Choose 'Site Information' to add to each dataset. Additional site information and metadata can be found by viewing the 
+                                                               'Site Information' selection under the NARS Dataset of Interest dropdown."),
                                                    size = "s", easyClose = TRUE, fade = TRUE)),#end of siteinfo condPanel
                                         # Press button for analysis 
                                         actionButton("goButton", strong("Assemble/Update Dataset"), 
@@ -471,6 +482,14 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                        span(h3(strong("Export Data As:")), style = "color:#337ab7;"),
                                                        downloadButton("dwnldcsv", icon=NULL, "CSV", 
                                                                       style = "background-color:#337AB7;
+                                                                               color:#FFFFFF;
+                                                                               border-color:#BEBEBE;
+                                                                               border-style:solid;
+                                                                               border-width:1px;
+                                                                               border-radius:2px;
+                                                                               font-size:16px;"),
+                                      downloadButton("dwnldexcel", icon=NULL, "XLSX", 
+                                                     style = "background-color:#337AB7;
                                                                                color:#FFFFFF;
                                                                                border-color:#BEBEBE;
                                                                                border-style:solid;
@@ -1276,12 +1295,27 @@ server <-function(input, output, session) {
   
   output$dwnldcsv <- downloadHandler(
     filename = function() {
-      paste0(datatitle(), ".csv", sep = "")
+      unlist(strsplit(paste0(datatitle(), ".xlsx", sep = ""), split=':', fixed=TRUE))[2]
       },
       content = function(file) {
         write.csv(Data(), file, row.names = FALSE)
       }
     )
+  
+  
+  
+  output$dwnldexcel <- downloadHandler(
+    filename = function(){unlist(strsplit(paste0(datatitle(), ".xlsx", sep = ""), split=':', fixed=TRUE))[2]},
+    content = function(file) {
+      wb <- loadWorkbook(file, create = TRUE)
+      createSheet(wb, "data")
+      createSheet(wb, "metadata")
+      writeWorksheet(wb, data = Data(), sheet = "data")
+      writeWorksheet(wb, data = MetaData(), sheet = "metadata")
+      saveWorkbook(wb)
+    },
+    contentType="application/xlsx" 
+  )
 
       
   ## Metadata Extract ----
@@ -1474,8 +1508,8 @@ server <-function(input, output, session) {
       options = list(dom = 'Bflrtip',
                      scrollX = TRUE,
                      buttons = list(
-                       list(extend = 'copy', filename = paste0(datatitle(),"_METADATA")),
-                       list(extend = 'csv', filename = paste0(datatitle(),"_METADATA")))
+                       list(extend = 'copy', filename = paste0(unlist(strsplit(datatitle(), split=' ', fixed=TRUE))[2],"_METADATA")),
+                       list(extend = 'csv', filename = paste0(unlist(strsplit(datatitle(), split=' ', fixed=TRUE))[2],"_METADATA")))
       ))
   })
   
