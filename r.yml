@@ -1,7 +1,5 @@
 packages:
-- cran_mirror: https://raw.githubusercontent.com/USEPA/cflinuxfs3-CRAN/master/cflinuxfs3/
-  num_threads: 2
-  packages:
+- packages:
     - name: openxlsx
     - name: dplyr
     - name: readr
@@ -11,3 +9,4 @@ packages:
     - name: shinyhelper
     - name: shinyjs
     - name: shinyalert
+    - name: XLConnect
