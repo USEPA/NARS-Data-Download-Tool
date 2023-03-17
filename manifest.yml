@@ -1,9 +1,0 @@
-applications:
-- name: NARSDataDownloadTool
-  memory: 500M
-  routes:
-    - route: NARS_Data_Tool.app.cloud.gov
-  disk_quota: 500M
-  buildpacks:
-    - r_buildpack
-  command: R -f shiny.R
