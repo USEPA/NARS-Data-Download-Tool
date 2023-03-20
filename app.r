@@ -1116,8 +1116,10 @@ server <-function(input, output, session) {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2017-02/',input$Survey, input$Year,'_',input$Indicator,'_02122014.csv'))
       } else if(input$Indicator == "wide_phabmet") {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2016-12/',input$Survey, input$Year,'_',input$Indicator,'_10202016.csv'))
-      } else if(input$Indicator %in% c("zooplankton-metrics-data-updated-12092021","zooplankton-count-data-updated")) {
-        Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-',input$Year,'-',input$Indicator,'-12092021.csv'))
+      } else if(input$Indicator == "zooplankton-count-data-updated") {
+        Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2021-12/nla-2012-zooplankton-count-data-updated-12092021.csv'))
+      } else if(input$Indicator == "zooplankton-metrics-data-updated-12092021") {
+        Data <- read_csv(paste0("https://www.epa.gov/system/files/other-files/2021-12/nla-2012-zooplankton-metrics-data-updated-12092021.csv"))
       } else if(input$Indicator %in% c("bentmet", "chla_wide")) {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2016-11/',input$Survey, input$Year,'_',input$Indicator,'.csv'))
       } else if(input$Indicator == "waterchem_wide") {
@@ -1420,9 +1422,9 @@ server <-function(input, output, session) {
       } else if(input$Indicator == "topsedhg") {
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2016-12/',input$Survey, input$Year,'_',input$Indicator,'_meta_08192016.txt'))
       } else if (input$Indicator == "zooplankton-metrics-data-updated-12092021") {
-        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-', input$Year,'zooplankton-metrics-metadata-updated-12092021.txt'))
+        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/nla-2012-zooplankton-metrics-metadata-updated-12092021.txt'))
       } else if (input$Indicator == "zooplankton-count-data-updated") {
-        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-', input$Year,'-zooplankton-raw-count-metadata.txt'))
+        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/nla-2012-zooplankton-raw-count-metadata.txt'))
       } else {#"zooplankton-raw-count"
         MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-', input$Year,'-',input$Indicator,'-metadata.txt'))
       }
