@@ -1,4 +1,4 @@
-#packages <- c("shiny", "openxlsx", "XLConnect", "dplyr", "readr", "DT", "bslib", "shinybusy", "shinyhelper", "shinyjs", "shinyalert")
+#packages <- c("shiny", "openxlsx", "dplyr", "readr", "DT", "bslib", "shinybusy", "shinyhelper", "shinyjs", "shinyalert")
 #installed_packages <- packages %in% rownames(installed.packages())
 #if(any(installed_packages == FALSE)) {
 #  install.packages(packages[!installed_packages])
@@ -8,7 +8,6 @@
 #lapply(packages, library, character.only = TRUE)
 library(shiny)
 library(openxlsx)
-library(XLConnect)
 library(dplyr)
 library(readr)
 library(DT)
@@ -1307,12 +1306,12 @@ server <-function(input, output, session) {
   output$dwnldexcel <- downloadHandler(
     filename = function(){unlist(strsplit(paste0(datatitle(), ".xlsx", sep = ""), split=':', fixed=TRUE))[2]},
     content = function(file) {
-      wb <- loadWorkbook(file, create = TRUE)
-      createSheet(wb, "data")
-      createSheet(wb, "metadata")
-      writeWorksheet(wb, data = Data(), sheet = "data")
-      writeWorksheet(wb, data = MetaData(), sheet = "metadata")
-      saveWorkbook(wb)
+      wb <- createWorkbook(file)
+      addWorksheet(wb, "data")
+      addWorksheet(wb, "metadata")
+      writeData(wb, x = Data(), sheet = "data")
+      writeData(wb, x = MetaData(), sheet = "metadata")
+      saveWorkbook(wb, file)
     },
     contentType="application/xlsx" 
   )
