@@ -1116,7 +1116,7 @@ server <-function(input, output, session) {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2017-02/',input$Survey, input$Year,'_',input$Indicator,'_02122014.csv'))
       } else if(input$Indicator == "wide_phabmet") {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2016-12/',input$Survey, input$Year,'_',input$Indicator,'_10202016.csv'))
-      } else if(input$Indicator %in% c("zooplankton-metrics-data-updated","zooplankton-count-data-updated")) {
+      } else if(input$Indicator %in% c("zooplankton-metrics-data-updated-12092021","zooplankton-count-data-updated")) {
         Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-',input$Year,'-',input$Indicator,'-12092021.csv'))
       } else if(input$Indicator %in% c("bentmet", "chla_wide")) {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2016-11/',input$Survey, input$Year,'_',input$Indicator,'.csv'))
@@ -1142,9 +1142,15 @@ server <-function(input, output, session) {
         }
       }
       if(input$Indicator != "wide_siteinfo") {
-        siteinfo <- read_csv(paste0('https://www.epa.gov/sites/default/files/2016-12/nla2012_wide_siteinfo_08232016.csv')) %>%
-          select(UID, LAT_DD83, LON_DD83, input$SiteInfo)
-        Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = VISIT_NO)
+        if(input$Indicator %in% c("chla_wide", "waterchem_wide")) {
+          siteinfo <- read_csv(paste0('https://www.epa.gov/sites/default/files/2016-12/nla2012_wide_siteinfo_08232016.csv')) %>%
+            select(UID, SITE_ID, VISIT_NO, LAT_DD83, LON_DD83, input$SiteInfo)
+          Data <- left_join(Data, siteinfo) %>% relocate(SITE_ID, VISIT_NO, LAT_DD83, LON_DD83, input$SiteInfo, .after = UID)
+        } else {
+          siteinfo <- read_csv(paste0('https://www.epa.gov/sites/default/files/2016-12/nla2012_wide_siteinfo_08232016.csv')) %>%
+            select(UID, LAT_DD83, LON_DD83, input$SiteInfo)
+          Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = VISIT_NO)
+        }
       }
     }
     ### 2011----
@@ -1413,7 +1419,7 @@ server <-function(input, output, session) {
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2016-12/',input$Survey, input$Year,'_',input$Indicator,'_meta_08232016.txt'))
       } else if(input$Indicator == "topsedhg") {
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2016-12/',input$Survey, input$Year,'_',input$Indicator,'_meta_08192016.txt'))
-      } else if (input$Indicator == "zooplankton-metrics-data-updated") {
+      } else if (input$Indicator == "zooplankton-metrics-data-updated-12092021") {
         MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-', input$Year,'zooplankton-metrics-metadata-updated-12092021.txt'))
       } else if (input$Indicator == "zooplankton-count-data-updated") {
         MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-', input$Year,'-zooplankton-raw-count-metadata.txt'))
