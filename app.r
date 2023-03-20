@@ -1294,7 +1294,7 @@ server <-function(input, output, session) {
   
   output$dwnldcsv <- downloadHandler(
     filename = function() {
-      unlist(strsplit(paste0(datatitle(), ".xlsx", sep = ""), split=':', fixed=TRUE))[2]
+      unlist(strsplit(paste0(datatitle(), ".csv", sep = ""), split=':', fixed=TRUE))[2]
       },
       content = function(file) {
         write.csv(Data(), file, row.names = FALSE)
