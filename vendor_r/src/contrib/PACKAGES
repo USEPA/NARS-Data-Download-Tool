@@ -84,13 +84,13 @@ MD5sum: b563fb481df98a8a309f0e559f61c910
 NeedsCompilation: no
 
 Package: htmlwidgets
-Version: 1.6.1
+Version: 1.6.2
 Imports: grDevices, htmltools (>= 0.5.4), jsonlite (>= 0.9.16), yaml,
         knitr (>= 1.8), rmarkdown
 Suggests: testthat
 Enhances: shiny (>= 1.1)
 License: MIT + file LICENSE
-MD5sum: 4f63ca4d21113dbd0cd22d77ce2223ff
+MD5sum: 5fd428b1191efad6446cafaf41299526
 NeedsCompilation: no
 
 Package: knitr
@@ -145,13 +145,6 @@ Suggests: covr, curl, datasets, knitr, rmarkdown, spelling, stringi,
         testthat (>= 3.1.2), tzdb (>= 0.1.1), waldo, withr, xml2
 License: MIT + file LICENSE
 MD5sum: 6d1d7502f0052e4c47c9b35a81f59b2e
-NeedsCompilation: yes
-
-Package: rJava
-Version: 1.0-6
-Depends: R (>= 3.6.0), methods
-License: LGPL-2.1
-MD5sum: c3f6299b914e605930d8acf28db13a94
 NeedsCompilation: yes
 
 Package: rmarkdown
@@ -272,15 +265,6 @@ Suggests: testit, parallel, codetools, rstudioapi, tinytex (>= 0.30),
 License: MIT + file LICENSE
 MD5sum: 33d71bfaa238e075df647401ba9bc014
 NeedsCompilation: yes
-
-Package: XLConnect
-Version: 1.0.7
-Depends: R (>= 3.6.0)
-Imports: methods, rJava (>= 1.0-1)
-Suggests: RUnit, lattice, ggplot2 (>= 0.9.3), zoo
-License: GPL-3
-MD5sum: c4925a694bea4f9db5afe9ff604bbdf0
-NeedsCompilation: no
 
 Package: yaml
 Version: 2.3.7
