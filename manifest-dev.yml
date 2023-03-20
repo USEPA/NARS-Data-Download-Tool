@@ -1,6 +1,6 @@
 applications:
 - name: nars-data-download-dev
-  memory: 500M
+  memory: 750M
   routes:
     - route: nars-data-download-dev.app.cloud.gov
   disk_quota: 1G
