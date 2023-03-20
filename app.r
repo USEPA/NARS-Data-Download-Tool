@@ -974,11 +974,16 @@ server <-function(input, output, session) {
         }
       }
       if(input$Indicator != "SiteInfo") {
-        siteinfo <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_SiteInfo.csv')) %>%
-          select(UID, LAT_DD83, LON_DD83, input$SiteInfo)
-        Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = VISIT_NO)
+        if(input$Indicator == "landscape"){
+          siteinfo <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_SiteInfo.csv')) %>%
+            select(SITE_ID, LAT_DD83, LON_DD83, input$SiteInfo) %>% unique()
+          Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = SITE_ID)
+        } else{
+          siteinfo <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-01/NRSA_1819_SiteInfo.csv')) %>%
+            select(UID, LAT_DD83, LON_DD83, input$SiteInfo)
+          Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = VISIT_NO)
+        }
       }
-    }
     ### 2017----
     if(input$Survey == "nla" & input$Year == "2017") {
       if(input$Indicator == "zooplankton-count") {
