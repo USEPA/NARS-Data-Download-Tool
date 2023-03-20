@@ -9,4 +9,3 @@ packages:
     - name: shinyhelper
     - name: shinyjs
     - name: shinyalert
-    - name: XLConnect
