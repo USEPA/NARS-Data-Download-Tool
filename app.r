@@ -369,13 +369,11 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                            div(class="sidebar", 
                                sidebarPanel(#width = 3,
                                  tags$head(
-                                   #tags$style(type="text/css", "select { max-width: 400px; }"),
-                                   #tags$style(type="text/css", ".span4 { max-width: 400px; }"),
                                    tags$style(type="text/css", ".sidebar { max-width: 1200px; }")
                                  ),
                                         #Survey Input
                                         fluidRow(
-                                          column(9,
+                                          column(10,
                                         selectInput(inputId = "Survey",
                                                     label = strong("Select Survey"),
                                                     choices = c("Rivers and Streams (NRSA)"="nrsa", "Lakes (NLA)"="nla", 
