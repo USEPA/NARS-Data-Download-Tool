@@ -368,16 +368,21 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                            id = "navbar",
                            div(class="sidebar", 
                                sidebarPanel(#width = 3,
+                                 tags$head(
+                                   #tags$style(type="text/css", "select { max-width: 400px; }"),
+                                   #tags$style(type="text/css", ".span4 { max-width: 400px; }"),
+                                   tags$style(type="text/css", ".sidebar { max-width: 1200px; }")
+                                 ),
                                         #Survey Input
                                         fluidRow(
-                                          column(7,
+                                          column(9,
                                         selectInput(inputId = "Survey",
                                                     label = strong("Select Survey"),
                                                     choices = c("Rivers and Streams (NRSA)"="nrsa", "Lakes (NLA)"="nla", 
                                                                 "Coastal (NCCA)"="ncca", "Wetlands (NWCA)"="nwca"),
                                                     selected = NULL,
                                                     multiple = FALSE, 
-                                                    width = "230px") %>%
+                                                    width = "350px") %>%
                                           #Survey helper
                                           helper(type = "inline",
                                                  icon = "circle-question",
@@ -395,17 +400,14 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                     choices = "",
                                                     selected = NULL,
                                                     multiple = FALSE, 
-                                                    width = "230px") %>%
+                                                    width = "350px") %>%
                                           #Survey helper
                                           helper(type = "inline",
                                                  title = "NARS Survey Year",
                                                  icon = "circle-question",
                                                  content = c("The four National Aquatic Resource Surveys are conducted on a five-year cycle with the Streams 
                                                              and Rivers survey requiring two years to complete."),
-                                                 size = "s", easyClose = TRUE, fade = TRUE)
-                                        )),
-                                        fluidRow(
-                                          column(9,
+                                                 size = "s", easyClose = TRUE, fade = TRUE),
                                         conditionalPanel(
                                           condition = "input.Survey == 'ncca' & input.Year == '2015'",
                                           radioButtons(inputId = "NCCA_Type",
@@ -428,7 +430,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                              These indicators are used to assess ecological condition and to examine conditions 
                                                              that may negatively influence or affect stream condition (i.e. stressors).",
                                                              "Metadata for each NARS dataset file can be found by navigating to the Metadata tab. If 
-                                                             downloading dataset an a .XLSX file, metadata will be stored as seperate sheet."),
+                                                             downloading dataset as a .XLSX file, metadata will be stored as seperate sheet."),
                                                  size = "s", easyClose = TRUE, fade = TRUE),
                                         #State Input
                                       #  conditionalPanel(
@@ -984,6 +986,7 @@ server <-function(input, output, session) {
           Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = VISIT_NO)
         }
       }
+    }
     ### 2017----
     if(input$Survey == "nla" & input$Year == "2017") {
       if(input$Indicator == "zooplankton-count") {
