@@ -43,7 +43,7 @@ choices2015 <- c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Gra
                  "Hydrographic Profile"="hydrographic_profile", "Microcystin"="microcystin", "Secchi Depth"="secchi", "Sediment Chemistry"="sediment_chemistry", "Site Information"="site_information", "Water Chemistry"="water_chemistry")
 
 choices1314 <- c("Benthic Macroinvertebrate Count"="bentcnts", "Benthic Macroinvertebrate Metrics"="bentmet", "Benthic Macroinvertebrate MMI"="bentmmi", "Chlorophyll a"="widewchl", "Enterococci"="ente", "Field Chemistry"="wide_field_meas", 
-                 "Fish Metrics"="fishmet", "Fish MMI"="fishmmi", "Fish Counts" = "fishcts", "Fish Tissue (Plugs)-Mercury"="fishplug_hg", "Microcystin"="micx", "Periphyton"="widepchl", "Periphyton Biomass"="widepbio", "Physical Habitat Metrics"="phabmed", 
+                 "Fish Metrics"="fishmet", "Fish MMI"="fishmmi", "Fish Counts" = "fishcts", "Fish Tissue (Plugs)-Mercury"="fishplug_hg", "Indicator Condition"="key_var", "Microcystin"="micx", "Periphyton"="widepchl", "Periphyton Biomass"="widepbio", "Physical Habitat Metrics"="phabmed", 
                  "Site Information"="siteinformation_wide", "Water Chemistry"="widechem", "Water Chemistry Indicator"="chem")
 
 choices2012 <- c("Algal Toxin"="algaltoxins", "Atrazine"="atrazine", "Benthic Condition"="bentcond", "Benthic Macroinvertebrate Count"="wide_benthic", "Benthic Macroinvertebrate Metrics"="bentmet", "Chlorophyll a"="chla_wide", 
@@ -73,7 +73,7 @@ choices0506 <- c("Benthic Macroinvertebrates"="benthicdata", "Sediment Chemistry
 
 # siteinfo ----
 site1819 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Feature Type"="FTYPE", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", "Major Basin Name"="MAJ_BAS_NM", 
-              "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_ORD", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NRS18", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME")
+              "Miss. Basin Name"="MIS_BAS_NM", "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_ORD", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NRS18", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME")
 
 site2017 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
               "Lake Owner"="OWN_NARS", "Major Basin Name"="MAJ_BAS_NM", "NES Lake"="NES_LAKE", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NLA17", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME")
@@ -103,7 +103,7 @@ site0809 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015
 site2007 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="WSA_ECO3", "Aggr. Ecoregion 9"="WSA_ECO9", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEV_PT", "EPA Region"="EPA_REG", "HUC8"="HUC_8", "Lake Name"="LAKENAME", "Lake Origin"="LAKE_ORIGIN", "NES Lake"="NESLAKE",  
               "Lake Perimeter"="LAKEPERIM", "Lake Max Depth"="DEPTHMAX", "Urban/NonUrban"="URBAN")
 
-
+site0506 <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "Estuary"="ESTUARY", "NCA Region"="NCA_REGION")
 
 
 
@@ -369,6 +369,8 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                            div(class="sidebar", 
                                sidebarPanel(#width = 3,
                                  tags$head(
+                                   #tags$style(type="text/css", "select { max-width: 400px; }"),
+                                   #tags$style(type="text/css", ".span4 { max-width: 400px; }"),
                                    tags$style(type="text/css", ".sidebar { max-width: 1200px; }")
                                  ),
                                         #Survey Input
@@ -450,8 +452,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                        input.Indicator !== 'siteinfo.revised.06212016' &
                                                        input.Indicator !== 'siteinfo_0' &
                                                        input.Indicator !== 'sampledlakeinformation_20091113' &
-                                                       input.Indicator !== 'siteinformationdata' &
-                                                       input.Year !== '1999-2001/2005-2006'",
+                                                       input.Indicator !== 'siteinformationdata'",
                                           selectInput(inputId = "SiteInfo",
                                                       label = strong(HTML("Select Site Information <br/> to Add")),
                                                       choices = "",
@@ -463,7 +464,8 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                    icon = "circle-question",
                                                    title = "Site Information",
                                                    content = c("Choose 'Site Information' to add to each dataset. Additional site information and metadata can be found by viewing the 
-                                                               'Site Information' selection under the NARS Dataset of Interest dropdown."),
+                                                               'Site Information' selection under the NARS Dataset of Interest dropdown. This information can be linked to other data files
+                                                                using UID and/or UNIQUE_ID fields."),
                                                    size = "s", easyClose = TRUE, fade = TRUE)),#end of siteinfo condPanel
                                         # Press button for analysis 
                                         actionButton("goButton", strong("Assemble/Update Dataset"), 
@@ -714,7 +716,7 @@ server <-function(input, output, session) {
              imageUrl ='www/NARS_logo_sm.jpg',
              paste("Use the dropdown menus to explore available datasets collected in the", 
                     a(href="https://www.epa.gov/national-aquatic-resource-surveys/data-national-aquatic-resource-surveys", "National Aquatic Resource Surveys (NARS).", target="_blank"),
-                    "Users have the option to filter the data by state(s) of interest and join site information to selected datasets.",
+                    "Users have the option to filter the data by state(s) of interest and join site information to selected datasets. Metadata for each NARS dataset file can be found by navigating to the Metadata tab at the top of the page.",
                     br(), br(),
                     "Users of the data are encouraged to review the", 
                     a(href="https://www.epa.gov/national-aquatic-resource-surveys/outreach-materials-national-aquatic-resource-surveys", "Technical Reports, Field and Laboratory Manuals, and metadata files", target="_blank"),
@@ -732,7 +734,7 @@ server <-function(input, output, session) {
                  imageUrl ='www/NARS_logo_sm.jpg',
                  paste("Use the dropdown menus to explore available datasets collected in the", 
                      a(href="https://www.epa.gov/national-aquatic-resource-surveys/data-national-aquatic-resource-surveys", "National Aquatic Resource Surveys (NARS).", target="_blank"),
-                     "Users have the option to filter the data by state(s) of interest and join site information to selected datasets.",
+                     "Users have the option to filter the data by state(s) of interest and join site information to selected datasets.Metadata for each NARS dataset file can be found by navigating to the Metadata tab at the top of the page.",
                      br(), br(),
                      "Users of the data are encouraged to review the", 
                      a(href="https://www.epa.gov/national-aquatic-resource-surveys/outreach-materials-national-aquatic-resource-surveys", "Technical Reports, Field and Laboratory Manuals, and metadata files", target="_blank"),
@@ -931,6 +933,8 @@ server <-function(input, output, session) {
     if(input$Year == "1999-2001/2005-2006") {
       updateSelectInput(session, "Indicator",
                         choices = choices0506)
+      updateSelectInput(session, "SiteInfo", 
+                        choices = site0506)
     }
   })
   
@@ -1080,6 +1084,9 @@ server <-function(input, output, session) {
       }
       if(input$Indicator %in% c("fishplug_hg", "siteinformation_wide")) {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2019-04/',input$Survey, input$Year,'_',input$Indicator,'_04292019.csv'))
+      }
+      if(input$Indicator %in% c("key_var")) {
+        Data <- read_csv(paste0('https://www.epa.gov/sites/default/files/2019-05/nrsa1314_allcond_05312019_0.csv'))
       }
       if(input$State != "All States" || length(input$State) > 1) {
         if("PSTL_CODE" %in% colnames(Data)) {
@@ -1281,12 +1288,23 @@ server <-function(input, output, session) {
     }
     ### 1999-2001/2005-2006----
     if(input$Survey == "ncca" & input$Year == "1999-2001/2005-2006") {
-      Data <- read.xlsx(paste0("https://www.epa.gov/sites/default/files/2014-10/nca_", input$Indicator,"_narschallenge.xlsx"), sheet = 1)
+      Data <- read_csv(paste0("https://www.epa.gov/system/files/other-files/2023-03/nca_", input$Indicator,'.csv'))
       if(input$State != "All States" || length(input$State) > 1) {
         Data <- Data %>%
           filter(PSTL_CODE %in% input$State)
       }
-    }
+      
+      
+      if(input$Indicator != "siteinformationdata") {
+        siteinfo <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-03/nca_siteinformationdata.csv')) %>%
+          select(SITE_ID, input$SiteInfo)
+        Data <- left_join(Data, siteinfo) %>% relocate(input$SiteInfo, .after = SITE_ID)
+      }
+      
+      
+      
+      
+    } 
     
     remove_modal_spinner()
     
@@ -1396,6 +1414,8 @@ server <-function(input, output, session) {
     if (input$Survey == "nrsa" & input$Year == "1314") {
       if(input$Indicator == "fishmmi"){
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2019-04/',input$Survey, input$Year,'_','fish_meta_04292019.txt'))
+      } else if(input$Indicator %in% c("key_var")) {
+        MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2019-05/nrsa1314_allcond_meta_05312019.txt'))
       } else if(input$Indicator == "siteinformation_wide") {
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2019-04/',input$Survey, input$Year,'_','sitesuids_wide_meta_04292019.txt'))
       } else if(input$Indicator == "fishplug_hg"){
@@ -1425,7 +1445,7 @@ server <-function(input, output, session) {
       } else if (input$Indicator == "zooplankton-metrics-data-updated-12092021") {
         MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/nla-2012-zooplankton-metrics-metadata-updated-12092021.txt'))
       } else if (input$Indicator == "zooplankton-count-data-updated") {
-        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/nla-2012-zooplankton-raw-count-metadata.txt'))
+        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2023-03/nla12_wide_zooplankton.txt'))
       } else {#"zooplankton-raw-count"
         MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-', input$Year,'-',input$Indicator,'-metadata.txt'))
       }
@@ -1500,12 +1520,8 @@ server <-function(input, output, session) {
     }
     ### 1999-2001/2005-2006----
     if(input$Survey == "ncca" & input$Year == "1999-2001/2005-2006"){ 
-        if(input$Indicator == "sedchemdata") {
-        MetaData <- as.data.frame("Metadata Not Available")
-      } else {
-        MetaData <- read.xlsx(paste0("https://www.epa.gov/sites/default/files/2014-10/nca_", input$Indicator,"_narschallenge.xlsx"), sheet = 2)
-      }
-    }
+        MetaData <- read.delim(paste0("https://www.epa.gov/system/files/other-files/2023-03/nca_", input$Indicator,"_metadata.txt"))
+    } 
     remove_modal_spinner()
     MetaData
   })
