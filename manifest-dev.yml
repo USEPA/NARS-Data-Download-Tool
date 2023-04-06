@@ -1,9 +1,0 @@
-applications:
-- name: nars-data-download-dev
-  memory: 750M
-  routes:
-    - route: nars-data-download-dev.app.cloud.gov
-  disk_quota: 1G
-  buildpacks:
-    - r_buildpack
-  command: R -f shiny.R
