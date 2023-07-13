@@ -73,27 +73,27 @@ choices0506 <- c("Benthic Macroinvertebrates"="benthicdata", "Sediment Chemistry
 
 # siteinfo ----
 site1819 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Feature Type"="FTYPE", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", "Major Basin Name"="MAJ_BAS_NM", 
-              "Miss. Basin Name"="MIS_BAS_NM", "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_ORD", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NRS18", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME")
+              "Miss. Basin Name"="MIS_BAS_NM", "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_ORD", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NRS18", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2017 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
-              "Lake Owner"="OWN_NARS", "Major Basin Name"="MAJ_BAS_NM", "NES Lake"="NES_LAKE", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NLA17", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME")
+              "Lake Owner"="OWN_NARS", "Major Basin Name"="MAJ_BAS_NM", "NES Lake"="NES_LAKE", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NLA17", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2016 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "COE Region"="COE_REGION", "County"="CNTYNAME", "HUC12"="HUC12", "LRR Name"="LRR_NAME", "LRR Symbol"="LRR_SYM", "MLRA Symbol"="MLRARSYM", 
-              "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "US L3 Name"="US_L3NAME", "US L3 Code"="US_L3CODE", "Wetland Class"="WETCLS_EVL", "Wetland Class HGM"="WETCLS_HGM")
+              "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "US L3 Name"="US_L3NAME", "US L3 Code"="US_L3CODE", "Wetland Class"="WETCLS_EVL", "Wetland Class HGM"="WETCLS_HGM", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2015est <- c("Add Site Info (optional)"="", "DWH Region"="DWH_REGION", "EPA Region"="EPA_REG", "Estuarine Group"="EST_GROUP", "Estuary Size"="SMALL_EST", "Feature Name"="FEAT_NM", "NCCA Region"="NCCA_REG", "NEP Name"="NEP_NAME", "Province"="PROVINCE",
-                 "Stratum"="STRATUM", "Station Depth"="STATION_DEPTH")
+                 "Stratum"="STRATUM", "Station Depth"="STATION_DEPTH", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 site2015gl <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "Feature Name"="FEAT_NM", "Great Lake"="GREAT_LAKE", "Lake Region"="LAKE_REG", "NCCA Region"="NCCA_REG", "NPS Park"="NPS_PARK", "Province"="PROVINCE",
-                "Stratum"="STRATUM", "Station Depth"="STATION_DEPTH")  
+                "Stratum"="STRATUM", "Station Depth"="STATION_DEPTH", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")  
 
 site1314 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", "Major Basin Name"="MAJ_BAS_NM", 
-              "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_CAL", "Urban/NonUrban"="NRS13_URBN", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME")
+              "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_CAL", "Urban/NonUrban"="NRS13_URBN", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2012 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
-              "Lake Owner"="OWNSHP", "Major Basin Name"="MAJ_BASIN", "NES Lake"="NES_LAKE", "Urban/NonUrban"="URBAN", "US L3 Code"="US_L3CODE_2015", "US L4 Code"="US_L4CODE_2015")
+              "Lake Owner"="OWNSHP", "Major Basin Name"="MAJ_BASIN", "NES Lake"="NES_LAKE", "Urban/NonUrban"="URBAN", "US L3 Code"="US_L3CODE_2015", "US L4 Code"="US_L4CODE_2015", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2011 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "COE Region"="COE_REGION", "County"="COUNTY", "HUC10"="HUC10", "LRR Name"="LRR_NAME", "LRR Symbol"="LRRSYM", "MLRA ID"="MLRA_ID",
-              "MLRA Name"="MLRA_NAME", "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "US L3 Name"="US_L3NAME_2015", "US L3 Code"="US_L3CODE_2015", "Wetland Class"="NWCA_WET_GRP", "Wetland Class HGM"="CLASS_FIELD_HGM")
+              "MLRA Name"="MLRA_NAME", "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "US L3 Name"="US_L3NAME_2015", "US L3 Code"="US_L3CODE_2015", "Wetland Class"="NWCA_WET_GRP", "Wetland Class HGM"="CLASS_FIELD_HGM", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2010 <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "NCA Region"="NCA_REGION", "NEP Name"="NEP_NM", "NPS Park"="NPSPARK", "RSRC Class"="RSRC_CLASS", "Province"="PROVINCE", "Station Depth"="STATION_DEPTH", "Waterbody Name"="WTBDY_NM")
 
@@ -101,7 +101,7 @@ site0809 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015
               "US L3 Code"="US_L3CODE_2015", "US L4 Code"="US_L4CODE_2015", "Watershed Area"="WSAREA_NARS")
 
 site2007 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="WSA_ECO3", "Aggr. Ecoregion 9"="WSA_ECO9", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEV_PT", "EPA Region"="EPA_REG", "HUC8"="HUC_8", "Lake Name"="LAKENAME", "Lake Origin"="LAKE_ORIGIN", "NES Lake"="NESLAKE",  
-              "Lake Perimeter"="LAKEPERIM", "Lake Max Depth"="DEPTHMAX", "Urban/NonUrban"="URBAN")
+              "Lake Perimeter"="LAKEPERIM", "Lake Max Depth"="DEPTHMAX", "Urban/NonUrban"="URBAN", "Albers XCOORD"="ALBERS_X", "Albers YCOORD"="ALBERS_Y")
 
 site0506 <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "Estuary"="ESTUARY", "NCA Region"="NCA_REGION")
 
