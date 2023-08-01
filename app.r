@@ -27,16 +27,15 @@ choices1819 <- c("Algal Toxin"="algal_toxin", "Benthic Macroinvertebrate Count"=
                  "Field Chemistry Measures"="field_wide", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs", "Fish Sampling Info"="fish-sampling-information", "Fish Count"="fish-count", "Fish Metrics"="fish-metrics", 
                  "Landscape Data"="landscape", "Periphyton Biomass"="pbio_0", "Periphyton/Chlorophyll a"="PeriChla", "Physical Habitat Metrics"="physical_habitat_larger_set_of_metrics", "Site Information"="SiteInfo", "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
 
-choices2017 <- c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Benthic Macroinvertebrate Count"="benthic_count", "Benthic Macroinvertebrate Metrics"="benthic_metrics", 
-                 "E. Coli"="e.coli", "Hydrographic Profile"="profile", "Physical Habitat"="phab", "Secchi Depth"="secchi", "Phytoplankton Count"="phytoplankton_count", "Sediment Chemistry"="sediment_chemistry", 
-                 "Site Information"="site_information", "Water Chemistry/Chlorophyll a"="water_chemistry_chla", "Zooplankton Count"="zooplankton-count",
-                 "Zooplankton Count (Raw)"="zooplankton-raw-count", "Zooplankton Metrics"="zooplankton-metrics")
+choices2017 <- c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Benthic Macroinvertebrate Count"="benthic_count", "Benthic Macroinvertebrate Metrics"="benthic_metrics", "Benthic Taxa List"="benthic_taxa_list", "Condition Estimates"="condition_estimates", "Data for Population Estimates"="data_for_population_estimates",
+                 "E. Coli"="e.coli", "Hydrographic Profile"="profile", "Landscape Metrics"="landMets", "Physical Habitat"="phab", "Phytoplankton Count"="phytoplankton_count", "Phytoplankton Taxa List"="phytoplankton_taxa", "Secchi Depth"="secchi", "Sediment Chemistry"="sediment_chemistry", 
+                 "Site Information"="site_information", "Water Chemistry/Chlorophyll a"="water_chemistry_chla", "Zooplankton Count"="zooplankton-count", "Zooplankton Count (Raw)"="zooplankton-raw-count", "Zooplankton Metrics"="zooplankton-metrics", "Zooplankton Taxa List"="zooplankton-taxa-list")
 
 choices2016 <- c("AA Characterization"="aa_characterization", "AA Hydrology USACOE"="aa_hydrology_usacoe", "AA Hydrology Stressors"="aa_hydrology_sources", "Buffer Native Cover"="buffer_characterization_natcover", 
-                 "Buffer Stressors"="buffer_characterization_stressors", "Floras Used/VegPlot Layout"="floras_used_and_veg_plot_layout", "Ground Surface"="ground_surface", "Microcystin"="microcystin", 
-                 "Plant Cover Height"="plant-species-cover-height", "Site Information"="site-information", "Soil Horizon Chemistry"="soil_horizon_chemistry", 
+                 "Buffer Stressors"="buffer_characterization_stressors", "Condition Estimates"="condition_estimates", "Data for Population Estimates"="2011_data_for_population_estimates", "Floras Used/VegPlot Layout"="floras_used_and_veg_plot_layout", "Ground Surface"="ground_surface", "Landscape Metrics"="landscape_metrics", "Microcystin"="microcystin", 
+                 "Plant Cover Height"="plant-species-cover-height", "Plant C Values"="plant_cvalues", "Plant Native Status"="plant_native_status", "Plant Wis"="plant_wis", "Plant Taxa"="plant_taxa", "Site Information"="site-information", "Soil Horizon Chemistry"="soil_horizon_chemistry", 
                  "Soil Depth Core Chemistry"="soil_stddepth_core_chemistry", "Soil Horizon Description"="soil_horizon_description", "Soil Pit Characteristics"="soil_pit_characteristics",  
-                 "Surface Water Characterization"="surface_water_characterization",  "Tree Cover/Count"="tree_cover_count", "Vegetation Type"="vegetation_type",
+                 "Stressor Condition"="cond_stress", "Surface Water Characterization"="surface_water_characterization",  "Tree Cover/Count"="tree_cover_count", "Vegetation MMI"="veg_mmi", "Vegetation Type"="vegetation_type",
                  "VegPlot Location"="veg_plot_location", "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
 
 choices2015 <- c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminants", "Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs",  
@@ -72,38 +71,44 @@ choices2007 <- c("Benthic Macroinvertebrate Condition"="bentcond_08232016", "Ben
 choices0506 <- c("Benthic Macroinvertebrates"="benthicdata", "Sediment Chemistry"="sedchemdata", "Site Information"="siteinformationdata", "Water Chemistry"="waterchemdata")  
 
 # siteinfo ----
-site1819 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Feature Type"="FTYPE", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", "Major Basin Name"="MAJ_BAS_NM", 
-              "Miss. Basin Name"="MIS_BAS_NM", "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_ORD", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NRS18", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site1819 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Feature Type"="FTYPE", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", 
+              "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Major Basin Name"="MAJ_BAS_NM", "Miss. Basin Name"="MIS_BAS_NM", "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_ORD", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NRS18", 
+              "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2017 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
-              "Lake Owner"="OWN_NARS", "Major Basin Name"="MAJ_BAS_NM", "NES Lake"="NES_LAKE", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NLA17", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+              "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Lake Origin"= "LAKE_ORGN", "Lake Owner"="OWN_NARS", "Major Basin Name"="MAJ_BAS_NM", "NES Lake"="NES_LAKE", "Site Type"="SITETYPE", "Size Class"="AREA_CAT6", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NLA17",  
+              "Weight Category"="WGT_CAT", "Weights for 2017 Pop. Estimates"="WGT_TP_CORE", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
-site2016 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "COE Region"="COE_REGION", "County"="CNTYNAME", "HUC12"="HUC12", "LRR Name"="LRR_NAME", "LRR Symbol"="LRR_SYM", "MLRA Symbol"="MLRARSYM", 
-              "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "US L3 Name"="US_L3NAME", "US L3 Code"="US_L3CODE", "Wetland Class"="WETCLS_EVL", "Wetland Class HGM"="WETCLS_HGM", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site2016 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "EPA Region"="EPA_REG", "HUC12"="HUC12", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "LRR Name"="LRR_NAME", "LRR Symbol"="LRR_SYM", "MLRA Symbol"="MLRARSYM", 
+              "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "USACE Region"="COE_REGION", "Unique ID"="UNIQUE_ID", "Wetland Class (Cowardin)"="WETCLS_EVL", "Wetland Class (HGM)"="WETCLS_HGM", 
+              "Weights for 2016 Pop. Estimates"="WGT_TP_CORE", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2015est <- c("Add Site Info (optional)"="", "DWH Region"="DWH_REGION", "EPA Region"="EPA_REG", "Estuarine Group"="EST_GROUP", "Estuary Size"="SMALL_EST", "Feature Name"="FEAT_NM", "NCCA Region"="NCCA_REG", "NEP Name"="NEP_NAME", "Province"="PROVINCE",
                  "Stratum"="STRATUM", "Station Depth"="STATION_DEPTH", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 site2015gl <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "Feature Name"="FEAT_NM", "Great Lake"="GREAT_LAKE", "Lake Region"="LAKE_REG", "NCCA Region"="NCCA_REG", "NPS Park"="NPS_PARK", "Province"="PROVINCE",
                 "Stratum"="STRATUM", "Station Depth"="STATION_DEPTH", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")  
 
-site1314 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", "Major Basin Name"="MAJ_BAS_NM", 
-              "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_CAL", "Urban/NonUrban"="NRS13_URBN", "US L3 Name"="US_L3NAME", "US L4 Name"="US_L4NAME", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site1314 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Major Basin Name"="MAJ_BAS_NM", 
+              "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_CAL", "Urban/NonUrban"="NRS13_URBN", "Weights for 1314 Pop. Estimates"="WGT_EXT_SP", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2012 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
-              "Lake Owner"="OWNSHP", "Major Basin Name"="MAJ_BASIN", "NES Lake"="NES_LAKE", "Urban/NonUrban"="URBAN", "US L3 Code"="US_L3CODE_2015", "US L4 Code"="US_L4CODE_2015", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+              "Lake Origin"="LAKE_ORIGIN", "Lake Owner"="OWNSHP", "Major Basin Name"="MAJ_BASIN", "NES Lake"="NES_LAKE", "Site Type"="SITETYPE", "Size Class"="SIZE_CLASS", "Urban/NonUrban"="URBAN",  
+              "Weight Category"="WGT_CAT", "Weights for 2012 Pop. Estimates"="WGT_ALL", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
-site2011 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "COE Region"="COE_REGION", "County"="COUNTY", "HUC10"="HUC10", "LRR Name"="LRR_NAME", "LRR Symbol"="LRRSYM", "MLRA ID"="MLRA_ID",
-              "MLRA Name"="MLRA_NAME", "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "US L3 Name"="US_L3NAME_2015", "US L3 Code"="US_L3CODE_2015", "Wetland Class"="NWCA_WET_GRP", "Wetland Class HGM"="CLASS_FIELD_HGM", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site2011 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "USACE Region"="COE_REGION", "County"="CNTYNAME", "EPA Region"="EPA_REG", "HUC12"="HUC12", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "LRR Name"="LRR_NAME", "LRR Symbol"="LRR_SYM", "MLRA Symbol"="MLRARSYM", "NEP Name"="NEP_NAME",  
+               "Unique ID"="UNIQUE_ID", "Wetland Class (Cowardin)"="WETCLS_EVL", "Wetland Class (HGM)"="WETCLS_HGM", "Weights for 2011 Pop. Estimates"="WGT_TP", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
 
 site2010 <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "NCA Region"="NCA_REGION", "NEP Name"="NEP_NM", "NPS Park"="NPSPARK", "RSRC Class"="RSRC_CLASS", "Province"="PROVINCE", "Station Depth"="STATION_DEPTH", "Waterbody Name"="WTBDY_NM")
 
 site0809 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "EPA Region"="EPA_REG", "HUC8", "Location Name"="LOC_NAME", "Strahler Order"="STRAHLERORDER", "Urban/NonUrban"="URBAN", 
-              "US L3 Code"="US_L3CODE_2015", "US L4 Code"="US_L4CODE_2015", "Watershed Area"="WSAREA_NARS")
+              "Watershed Area"="WSAREA_NARS", "Weights for 0809 Pop. Estimates"="WGTNRSA09")
 
 site2007 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="WSA_ECO3", "Aggr. Ecoregion 9"="WSA_ECO9", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEV_PT", "EPA Region"="EPA_REG", "HUC8"="HUC_8", "Lake Name"="LAKENAME", "Lake Origin"="LAKE_ORIGIN", "NES Lake"="NESLAKE",  
-              "Lake Perimeter"="LAKEPERIM", "Lake Max Depth"="DEPTHMAX", "Urban/NonUrban"="URBAN", "Albers XCOORD"="ALBERS_X", "Albers YCOORD"="ALBERS_Y")
+              "Lake Origin"="LAKE_ORIGIN", "Lake Perimeter"="LAKEPERIM", "Lake Max Depth"="DEPTHMAX", "Site Type"="SITETYPE", "Size Class"="SIZE_CLASS", "Urban/NonUrban"="URBAN", "Weights for 2007 Pop. Estimates"="WGT_NLA", "Albers XCOORD"="ALBERS_X", "Albers YCOORD"="ALBERS_Y")
 
 site0506 <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "Estuary"="ESTUARY", "NCA Region"="NCA_REGION")
+
+
 
 
 
