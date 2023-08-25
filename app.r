@@ -22,94 +22,201 @@ addResourcePath(prefix = 'www', directoryPath = './www')
 
 state_name <- as.character(c(state.abb, "AS", "GU", "MP"))
 
+`%!in%` = Negate(`%in%`)
+
 # Indicators ----
-choices1819 <- c("Algal Toxin"="algal_toxin", "Benthic Macroinvertebrate Count"="benthic_macroinvertebrate_count", "Benthic Macroinvertebrate Metrics"="benthic_macroinvertebrate_metrics", "Enterococci"="enterococci_0",
+choices1819 <- list(`Site Information`=c("Landscape Data"="landscape", "Site Information"="SiteInfo"),
+                    `Human Health`=c("Enterococci"="enterococci_0", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs"),
+                    Chemical=c("Algal Toxin"="algal_toxin", "Field Chemistry Measures"="field_wide", "Water Chemistry/Chlorophyll a"="water_chemistry_chla"),
+                    Physical=c("Physical Habitat Metrics"="physical_habitat_larger_set_of_metrics"),
+                    Biological=c("Benthic Macroinvertebrate Count"="benthic_macroinvertebrate_count", "Benthic Macroinvertebrate Metrics"="benthic_macroinvertebrate_metrics", 
+                                 "Fish Sampling Info"="fish-sampling-information", "Fish Count"="fish-count", "Fish Metrics"="fish-metrics", "Periphyton Biomass"="pbio_0", "Periphyton/Chlorophyll a"="PeriChla"))
+choices2017 <- list(`Site Information`=c("Landscape Metrics"="landMets", "Site Information"="site_information"),
+                    `Human Health`=c("E. Coli"="e.coli"),
+                     Chemical=c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Hydrographic Profile"="profile", "Sediment Chemistry"="sediment_chemistry","Water Chemistry/Chlorophyll a"="water_chemistry_chla"),
+                     Physical=c("Physical Habitat"="phab"),
+                     Biological=c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Macroinvertebrate Metrics"="benthic_metrics", "Benthic Taxa List"="benthic_taxa_list",
+                                  "Phytoplankton Count"="phytoplankton_count", "Phytoplankton Taxa List"="phytoplankton_taxa", "Secchi Depth"="secchi",  
+                                  "Zooplankton Count"="zooplankton-count", "Zooplankton Count (Raw)"="zooplankton-raw-count", "Zooplankton Metrics"="zooplankton-metrics", "Zooplankton Taxa List"="zooplankton-taxa-list"),
+                     NARS=c("Condition Estimates"="condition_estimates", "Data for Population Estimates"="data_for_population_estimates"))
+                      
+choices2016 <- list(`Site Information`=c("Site Information"="site-information", "AA Characterization"="aa_characterization", "Landscape Metrics"="landscape_metrics"),
+                    `Human Health`=c("Microcystin"="microcystin"),
+                     Water=c("Water Chemistry/Chlorophyll a"="water_chemistry_chla", "Surface Water Characterization"="surface_water_characterization"),
+                     Soil=c("Soil Horizon Chemistry"="soil_horizon_chemistry", "Soil Depth Core Chemistry"="soil_stddepth_core_chemistry", "Soil Horizon Description"="soil_horizon_description", "Soil Pit Characteristics"="soil_pit_characteristics"),
+                     Physical=c("AA Hydrology USACOE"="aa_hydrology_usacoe", "AA Hydrology Stressors"="aa_hydrology_sources",
+                                "Buffer Native Cover"="buffer_characterization_natcover", "Buffer Stressors"="buffer_characterization_stressors"),
+                     Vegetation=c("Floras Used/VegPlot Layout"="floras_used_and_veg_plot_layout", "Ground Surface"="ground_surface", "Plant Cover Height"="plant-species-cover-height", "Plant C Values"="plant_cvalues", "Plant Native Status"="plant_native_status", "Plant WIS"="plant_wis", "Plant Taxa"="plant_taxa",
+                                  "Tree Cover/Count"="tree_cover_count", "Vegetation MMI"="veg_mmi", "Vegetation Type"="vegetation_type",
+                                  "VegPlot Location"="veg_plot_location"),
+                     NARS=c("Condition Estimates"="condition_estimates", "Data for Population Estimates"="2011_data_for_population_estimates", "Stressor Condition"="cond_stress"))
+
+choices2015 <- list(`Site Information`=c("Site Information"="site_information"),
+                    `Human Health`=c("Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs", "Microcystin"="microcystin"),
+                    Chemical=c("Hydrographic Profile"="hydrographic_profile","Secchi Depth"="secchi", "Sediment Chemistry"="sediment_chemistry", "Water Chemistry"="water_chemistry"),
+                    Physical=c(),
+                    Biological=c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminants"),
+                    NARS=c())
+
+choices1314 <- list(`Site Information`=c("Site Information"="siteinformation_wide"),
+                    `Human Health`=c("Enterococci"="ente", "Fish Tissue (Plugs)-Mercury"="fishplug_hg", "Microcystin"="micx"),
+                     Chemical=c("Field Chemistry"="wide_field_meas", "Water Chemistry"="widechem", "Water Chemistry Indicator"="chem"),
+                     Physical=c("Physical Habitat Metrics"="phabmed"),
+                     Biological=c("Benthic Macroinvertebrate Count"="bentcnts", "Benthic Macroinvertebrate Metrics"="bentmet", "Benthic Macroinvertebrate MMI"="bentmmi", "Chlorophyll a"="widewchl", "Fish Metrics"="fishmet", "Fish MMI"="fishmmi", "Fish Counts" = "fishcts",
+                                  "Periphyton"="widepchl", "Periphyton Biomass"="widepbio"),
+                     NARS=c("Indicator Condition"="key_var"))
+
+choices2012 <- list(`Site Information`=c("Site Information"="wide_siteinfo"),
+                    `Human Health`=c("Algal Toxin"="algaltoxins"),
+                    Chemical=c("Atrazine"="atrazine", "Sediment (Mercury)"="topsedhg", "Water Isotope Variables"="isotopes_wide", "Hydrographic Profile"="wide_profile"),
+                    Physical=c("Physical Habitat"="wide_phab", "Physical Habitat Metrics"="wide_phabmet"),
+                    Biological=c("Benthic Condition"="bentcond", "Benthic Macroinvertebrate Count"="wide_benthic", "Benthic Macroinvertebrate Metrics"="bentmet", "Chlorophyll a"="chla_wide", "Phytoplankton Count"="wide_phytoplankton_count",  "Zooplankton Count"="zooplankton-count-data-updated", 
+                                 "Zooplankton Count (Raw)"="zooplankton-raw-count", "Zooplankton Metrics"="zooplankton-metrics-data-updated-12092021"))
+
+choices2011 <- list(`Site Information`=c("AA Characterization"="aachar", "Landscape Metrics"="landscapechar", "Site Information"="siteinfo"),
+                    `Human Health`=c("Algal Toxin"="algaltoxin"),
+                     Water=c("Chlorophyll a"="chla", "Hydrology"="hydro", "Water Chemistry"="waterchem"),
+                     Soil=c("Sediment Enzymes"="sedenzymes", "Soil Chemistry"="soilchem", "Soil Profile Descriptions"="soilprofhorizons", "Soil Profile Attributes" = "soilprofsum"),
+                     Physical=c("Buffer Characterization"="bufferchar", "Disturbance Gradiant Inputs"="distgrad_inputs", "USARAM Attributes"="usaram_attributes", "USARAM Summary"="usaram_summary"),
+                     Vegetation=c("Floras/Vegplot Layouts"="floras_vegplotlayout", "Plant Cover and Height"="plant_pres_cvr", "Plant Vouchers"="plantvoucher", "Tree Data"="tree",
+                                  "Vegetation Metrics"="vegmetrics", "Vegetation MMI"="vegmmi", "Vegetation Plot Location"="vegplotloc", "Vegetation Type and Ground Surface"="vegtype_grndsurf"),
+                     NARS=c("Indicator Conditions"="cond_stress"))
+
+choices2010 <- list(`Site Information`=c("Site Information"="siteinfo.revised.06212016"),
+                    Chemical=c("Hydrographic Profile"="hydrolab", "Sediment Chemistry"="sediment_chemistry.revised.06.21.2016", "Sediment Toxicity"="sediment_toxicity_results", "Water Chemistry"="waterchem"),
+                    Biological=c("Benthic Macroinvertebrates"="benthic_data", "ECOFISH Collection Info"="ecofish_collection_info", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminant_data"),
+                    NARS=c())
+
+choices0809 <- list(`Site Information`=c("Landscape Metrics"="land", "Site Information"="siteinfo_0"),
+                    `Human Health`=c("Enterococci"="enterocond"),
+                    Chemical=c("Field Chemistry"="fieldchemmeasure", "Water Chemistry"="chem", "Water Chemistry Condition"="chemcond"),
+                    Physical=c( "Physcial Habitat Metrics (Common)"="phablow", "Physical Habitat Metrics (Large)"="phabmed"),
+                    Biological=c("Benthic Macroinvertebrate Count"="bentcts", "Benthic Macroinvertebrate MMI"="bentcond", "Fish Metrics"="fishmet", "Fish MMI"="fishcond", "Fish Counts" = "fishcts"))
+
+choices2007 <- list(`Site Information`=c("Landscape Metrics"="basin_landuse_metrics_20061022", "Site Information"="sampledlakeinformation_20091113"),
+                    Chemical=c("Hydrographic Profile"="profile_20091008", "Water Isotope"="isotopes_wide", "Water Chemistry Condition"="chemical_conditionestimates_20091123"),
+                    Physical=c("Physical Habitat"="phab_indexvalues", "Physical Habitat Condition"="phab_condtionestimates_20091130", "Physical Habitat Metrics (A)"="phab_metrics_a", "Physical Habitat Metrics (B)"="phab_metrics_b"),
+                    Biological=c("Benthic Macroinvertebrate Condition"="bentcond_08232016", "Benthic Macroinvertebrate Count"="wide_benthic_08092016", "Benthic Macroinvertebrate Metrics"="bentmet",
+                                 "Phytoplankton Condition"="plankton_oemodel_conditionestimates_20091125", "Phytoplankton Count (Diamtoms)"="phytoplankton_diatomcount_20091125", 
+                                 "Phytoplankton Count (Soft Algae)"="phytoplankton_softalgaecount_20091023", "Phytoplankton Sample Info"="phytoplankton_sampleinfo_20091023",  "Secchi Depth"="secchi_20091008", 
+                                 "Trophic Status"="trophic_conditionestimate_20091123", "Zooplankton Count"="zooplankton_count_20091022", "Zooplankton Sample Info"="zooplankton_sampleinformation_20091020"))
+
+choices0506 <- list(`Site Information`=c("Site Information"="siteinformationdata"),
+                    Chemical=c("Sediment Chemistry"="sedchemdata", "Water Chemistry"="waterchemdata"),
+                    Biological=c("Benthic Macroinvertebrates"="benthicdata"))
+
+
+# Datasets ----
+dataset1819 <- c("Algal Toxin"="algal_toxin", "Benthic Macroinvertebrate Count"="benthic_macroinvertebrate_count", "Benthic Macroinvertebrate Metrics"="benthic_macroinvertebrate_metrics", "Enterococci"="enterococci_0",
                  "Field Chemistry Measures"="field_wide", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs", "Fish Sampling Info"="fish-sampling-information", "Fish Count"="fish-count", "Fish Metrics"="fish-metrics", 
                  "Landscape Data"="landscape", "Periphyton Biomass"="pbio_0", "Periphyton/Chlorophyll a"="PeriChla", "Physical Habitat Metrics"="physical_habitat_larger_set_of_metrics", "Site Information"="SiteInfo", "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
 
-choices2017 <- c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Benthic Macroinvertebrate Count"="benthic_count", "Benthic Macroinvertebrate Metrics"="benthic_metrics", "Benthic Taxa List"="benthic_taxa_list", "Condition Estimates"="condition_estimates", "Data for Population Estimates"="data_for_population_estimates",
+dataset2017 <- c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Benthic Macroinvertebrate Count"="benthic_count", "Benthic Macroinvertebrate Metrics"="benthic_metrics", "Benthic Taxa List"="benthic_taxa_list", "Condition Estimates"="condition_estimates", "Data for Population Estimates"="data_for_population_estimates",
                  "E. Coli"="e.coli", "Hydrographic Profile"="profile", "Landscape Metrics"="landMets", "Physical Habitat"="phab", "Phytoplankton Count"="phytoplankton_count", "Phytoplankton Taxa List"="phytoplankton_taxa", "Secchi Depth"="secchi", "Sediment Chemistry"="sediment_chemistry", 
                  "Site Information"="site_information", "Water Chemistry/Chlorophyll a"="water_chemistry_chla", "Zooplankton Count"="zooplankton-count", "Zooplankton Count (Raw)"="zooplankton-raw-count", "Zooplankton Metrics"="zooplankton-metrics", "Zooplankton Taxa List"="zooplankton-taxa-list")
 
-choices2016 <- c("AA Characterization"="aa_characterization", "AA Hydrology USACOE"="aa_hydrology_usacoe", "AA Hydrology Stressors"="aa_hydrology_sources", "Buffer Native Cover"="buffer_characterization_natcover", 
+
+dataset2016 <- c("AA Characterization"="aa_characterization", "AA Hydrology USACOE"="aa_hydrology_usacoe", "AA Hydrology Stressors"="aa_hydrology_sources", "Buffer Native Cover"="buffer_characterization_natcover", 
                  "Buffer Stressors"="buffer_characterization_stressors", "Condition Estimates"="condition_estimates", "Data for Population Estimates"="2011_data_for_population_estimates", "Floras Used/VegPlot Layout"="floras_used_and_veg_plot_layout", "Ground Surface"="ground_surface", "Landscape Metrics"="landscape_metrics", "Microcystin"="microcystin", 
                  "Plant Cover Height"="plant-species-cover-height", "Plant C Values"="plant_cvalues", "Plant Native Status"="plant_native_status", "Plant Wis"="plant_wis", "Plant Taxa"="plant_taxa", "Site Information"="site-information", "Soil Horizon Chemistry"="soil_horizon_chemistry", 
                  "Soil Depth Core Chemistry"="soil_stddepth_core_chemistry", "Soil Horizon Description"="soil_horizon_description", "Soil Pit Characteristics"="soil_pit_characteristics",  
                  "Stressor Condition"="cond_stress", "Surface Water Characterization"="surface_water_characterization",  "Tree Cover/Count"="tree_cover_count", "Vegetation MMI"="veg_mmi", "Vegetation Type"="vegetation_type",
                  "VegPlot Location"="veg_plot_location", "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
 
-choices2015 <- c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminants", "Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs",  
+dataset2015 <- c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminants", "Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs",  
                  "Hydrographic Profile"="hydrographic_profile", "Microcystin"="microcystin", "Secchi Depth"="secchi", "Sediment Chemistry"="sediment_chemistry", "Site Information"="site_information", "Water Chemistry"="water_chemistry")
 
-choices1314 <- c("Benthic Macroinvertebrate Count"="bentcnts", "Benthic Macroinvertebrate Metrics"="bentmet", "Benthic Macroinvertebrate MMI"="bentmmi", "Chlorophyll a"="widewchl", "Enterococci"="ente", "Field Chemistry"="wide_field_meas", 
+dataset1314 <- c("Benthic Macroinvertebrate Count"="bentcnts", "Benthic Macroinvertebrate Metrics"="bentmet", "Benthic Macroinvertebrate MMI"="bentmmi", "Chlorophyll a"="widewchl", "Enterococci"="ente", "Field Chemistry"="wide_field_meas", 
                  "Fish Metrics"="fishmet", "Fish MMI"="fishmmi", "Fish Counts" = "fishcts", "Fish Tissue (Plugs)-Mercury"="fishplug_hg", "Indicator Condition"="key_var", "Microcystin"="micx", "Periphyton"="widepchl", "Periphyton Biomass"="widepbio", "Physical Habitat Metrics"="phabmed", 
                  "Site Information"="siteinformation_wide", "Water Chemistry"="widechem", "Water Chemistry Indicator"="chem")
 
-choices2012 <- c("Algal Toxin"="algaltoxins", "Atrazine"="atrazine", "Benthic Condition"="bentcond", "Benthic Macroinvertebrate Count"="wide_benthic", "Benthic Macroinvertebrate Metrics"="bentmet", "Chlorophyll a"="chla_wide", 
+dataset2012 <- c("Algal Toxin"="algaltoxins", "Atrazine"="atrazine", "Benthic Condition"="bentcond", "Benthic Macroinvertebrate Count"="wide_benthic", "Benthic Macroinvertebrate Metrics"="bentmet", "Chlorophyll a"="chla_wide", 
                  "Phytoplankton Count"="wide_phytoplankton_count", "Physical Habitat"="wide_phab", "Physical Habitat Metrics"="wide_phabmet", "Secchi Depth"="secchi", "Sediment (Mercury)"="topsedhg", 
                  "Site Information"="wide_siteinfo", "Water Chemistry"="waterchem_wide", "Water Isotope Variables"="isotopes_wide", "Hydrographic Profile"="wide_profile", "Zooplankton Count"="zooplankton-count-data-updated", 
                  "Zooplankton Count (Raw)"="zooplankton-raw-count", "Zooplankton Metrics"="zooplankton-metrics-data-updated-12092021")
 
-choices2011 <- c("AA Characterization"="aachar", "Algal Toxin"="algaltoxin", "Buffer Characterization"="bufferchar", "Chlorophyll a"="chla", "Disturbance Gradiant Inputs"="distgrad_inputs", "Floras/Vegplot Layouts"="floras_vegplotlayout",
+dataset2011 <- c("AA Characterization"="aachar", "Algal Toxin"="algaltoxin", "Buffer Characterization"="bufferchar", "Chlorophyll a"="chla", "Disturbance Gradiant Inputs"="distgrad_inputs", "Floras/Vegplot Layouts"="floras_vegplotlayout",
                  "Hydrology"="hydro", "Indicator Conditions"="cond_stress", "Landscape Metrics"="landscapechar", "Plant Cover and Height"="plant_pres_cvr", "Plant Vouchers"="plantvoucher", "Sediment Enzymes"="sedenzymes", "Site Information"="siteinfo", 
                  "Soil Chemistry"="soilchem", "Soil Profile Descriptions"="soilprofhorizons", "Soil Profile Attributes" = "soilprofsum", "Tree Data"="tree", "USARAM Attributes"="usaram_attributes", "USARAM Summary"="usaram_summary", 
                  "Vegetation Metrics"="vegmetrics", "Vegetation MMI"="vegmmi", "Vegetation Plot Location"="vegplotloc", "Vegetation Type and Ground Surface"="vegtype_grndsurf", "Water Chemistry"="waterchem")
 
-choices2010 <- c("Benthic Macroinvertebrates"="benthic_data", "ECOFISH Collection Info"="ecofish_collection_info", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminant_data", "Hydrographic Profile"="hydrolab", 
+dataset2010 <- c("Benthic Macroinvertebrates"="benthic_data", "ECOFISH Collection Info"="ecofish_collection_info", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminant_data", "Hydrographic Profile"="hydrolab", 
                  "Sediment Chemistry"="sediment_chemistry.revised.06.21.2016", "Sediment Toxicity"="sediment_toxicity_results", "Site Information"="siteinfo.revised.06212016", "Water Chemistry"="waterchem")
 
-choices0809 <- c("Benthic Macroinvertebrate Count"="bentcts", "Benthic Macroinvertebrate MMI"="bentcond", "Enterococci"="enterocond", "Field Chemistry"="fieldchemmeasure", "Fish Metrics"="fishmet", "Fish MMI"="fishcond", "Fish Counts" = "fishcts", 
+dataset0809 <- c("Benthic Macroinvertebrate Count"="bentcts", "Benthic Macroinvertebrate MMI"="bentcond", "Enterococci"="enterocond", "Field Chemistry"="fieldchemmeasure", "Fish Metrics"="fishmet", "Fish MMI"="fishcond", "Fish Counts" = "fishcts", 
                  "Landscape Metrics"="land", "Physcial Habitat Metrics (Common)"="phablow", "Physical Habitat Metrics (Large)"="phabmed", "Site Information"="siteinfo_0", "Water Chemistry"="chem", "Water Chemistry Indicator"="chemcond")
 
-choices2007 <- c("Benthic Macroinvertebrate Condition"="bentcond_08232016", "Benthic Macroinvertebrate Count"="wide_benthic_08092016", "Benthic Macroinvertebrate Metrics"="bentmet", "Hydrographic Profile"="profile_20091008", 
+dataset2007 <- c("Benthic Macroinvertebrate Condition"="bentcond_08232016", "Benthic Macroinvertebrate Count"="wide_benthic_08092016", "Benthic Macroinvertebrate Metrics"="bentmet", "Hydrographic Profile"="profile_20091008", 
                  "Landscape Metrics"="basin_landuse_metrics_20061022", "Physical Habitat"="phab_indexvalues", "Physical Habitat Condition"="phab_condtionestimates_20091130", "Physical Habitat Metrics (A)"="phab_metrics_a", 
                  "Physical Habitat Metrics (B)"="phab_metrics_b", "Phytoplankton Condition"="plankton_oemodel_conditionestimates_20091125", "Phytoplankton Count (Diamtoms)"="phytoplankton_diatomcount_20091125", 
                  "Phytoplankton Count (Soft Algae)"="phytoplankton_softalgaecount_20091023", "Phytoplankton Sample Info"="phytoplankton_sampleinfo_20091023", "Secchi Depth"="secchi_20091008", "Site Information"="sampledlakeinformation_20091113", 
                  "Trophic Status"="trophic_conditionestimate_20091123", "Water Chemistry Condition"="chemical_conditionestimates_20091123", "Water Isotope"="isotopes_wide", "Zooplankton Count"="zooplankton_count_20091022", 
                  "Zooplankton Sample Info"="zooplankton_sampleinformation_20091020")
 
-choices0506 <- c("Benthic Macroinvertebrates"="benthicdata", "Sediment Chemistry"="sedchemdata", "Site Information"="siteinformationdata", "Water Chemistry"="waterchemdata")  
+dataset0506 <- c("Benthic Macroinvertebrates"="benthicdata", "Sediment Chemistry"="sedchemdata", "Site Information"="siteinformationdata", "Water Chemistry"="waterchemdata")  
+
 
 # siteinfo ----
-site1819 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Feature Type"="FTYPE", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", 
-              "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Major Basin Name"="MAJ_BAS_NM", "Miss. Basin Name"="MIS_BAS_NM", "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_ORD", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NRS18", 
-              "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site1819 <- list(Empty=c("Add Site Info (optional)"=""),
+                 Local=c("County"="CNTYNAME", "Feature Type"="FTYPE", "Elevation"="ELEVATION", "GNIS Name"="GNIS_NAME", "HUC8", 
+                          "Strahler Order"="STRAH_ORD", "Urban/NonUrban"="URBN_NRS18", 
+                         "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD"),
+                 Regional=c("Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "EPA Region"="EPA_REG", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Major Basin Name"="MAJ_BAS_NM", "Miss. Basin Name"="MIS_BAS_NM"),
+                 NARS=c("NARS_Name"="NARS_NAME", "Unique ID"="UNIQUE_ID", "Weights for 2018/19 Pop. Estimates"="WGT_TP_CORE"))
 
-site2017 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
-              "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Lake Origin"= "LAKE_ORGN", "Lake Owner"="OWN_NARS", "Major Basin Name"="MAJ_BAS_NM", "NES Lake"="NES_LAKE", "Site Type"="SITETYPE", "Size Class"="AREA_CAT6", "Unique ID"="UNIQUE_ID", "Urban/NonUrban"="URBN_NLA17",  
-              "Weight Category"="WGT_CAT", "Weights for 2017 Pop. Estimates"="WGT_TP_CORE", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site2017  <- list(Empty=c("Add Site Info (optional)"=""),
+                  Local=c("Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
+                          "Lake Origin"= "LAKE_ORGN", "Lake Owner"="OWN_NARS", "NES Lake"="NES_LAKE", "Site Type"="SITETYPE", "Size Class"="AREA_CAT6",  "Urban/NonUrban"="URBN_NLA17"),
+                  Regional=c("Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "EPA Region"="EPA_REG", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Major Basin Name"="MAJ_BAS_NM"),
+                  NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Unique ID"="UNIQUE_ID", "Weight Category"="WGT_CAT", "Weights for 2017 Pop. Estimates"="WGT_TP_CORE"))
 
-site2016 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "EPA Region"="EPA_REG", "HUC12"="HUC12", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "LRR Name"="LRR_NAME", "LRR Symbol"="LRR_SYM", "MLRA Symbol"="MLRARSYM", 
-              "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "USACE Region"="COE_REGION", "Unique ID"="UNIQUE_ID", "Wetland Class (Cowardin)"="WETCLS_EVL", "Wetland Class (HGM)"="WETCLS_HGM", 
-              "Weights for 2016 Pop. Estimates"="WGT_TP_CORE", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site2016  <- list(Empty=c("Add Site Info (optional)"=""),
+                  Local=c("County"="CNTYNAME", "HUC12"="HUC12", "NEP Name"="NEP_NAME", "Reference NWCA"="REF_NWCA", "Wetland Class (Cowardin)"="WETCLS_EVL", "Wetland Class (HGM)"="WETCLS_HGM"),
+                  Regional=c("Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "EPA Region"="EPA_REG", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "LRR Name"="LRR_NAME", "LRR Symbol"="LRR_SYM", "MLRA Symbol"="MLRARSYM", "USACE Region"="COE_REGION"),
+                  NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Unique ID"="UNIQUE_ID", "Weights for 2016 Pop. Estimates"="WGT_TP_CORE"))
 
-site2015est <- c("Add Site Info (optional)"="", "DWH Region"="DWH_REGION", "EPA Region"="EPA_REG", "Estuarine Group"="EST_GROUP", "Estuary Size"="SMALL_EST", "Feature Name"="FEAT_NM", "NCCA Region"="NCCA_REG", "NEP Name"="NEP_NAME", "Province"="PROVINCE",
-                 "Stratum"="STRATUM", "Station Depth"="STATION_DEPTH", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
-site2015gl <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "Feature Name"="FEAT_NM", "Great Lake"="GREAT_LAKE", "Lake Region"="LAKE_REG", "NCCA Region"="NCCA_REG", "NPS Park"="NPS_PARK", "Province"="PROVINCE",
-                "Stratum"="STRATUM", "Station Depth"="STATION_DEPTH", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")  
+site2015est <- list(Empty=c("Add Site Info (optional)"=""),
+                    Local=c("Estuarine Group"="EST_GROUP", "Estuary Size"="SMALL_EST", "Feature Name"="FEAT_NM",  "NEP Name"="NEP_NAME", "Station Depth"="STATION_DEPTH"),
+                    Regional=c("DWH Region"="DWH_REGION", "EPA Region"="EPA_REG", "NCCA Region"="NCCA_REG", "Province"="PROVINCE"),
+                    NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Stratum"="STRATUM", "Weights for 2015 Pop. Estimates"="WGT_SP"))
+site2015gl <- list(Empty=c("Add Site Info (optional)"=""),
+                   Local=c("Feature Name"="FEAT_NM", "Great Lake"="GREAT_LAKE", "NPS Park"="NPS_PARK", "Station Depth"="STATION_DEPTH"),
+                   Regional=c("EPA Region"="EPA_REG", "Lake Region"="LAKE_REG", "NCCA Region"="NCCA_REG", "Province"="PROVINCE"),
+                   NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Stratum"="STRATUM", "Weights for 2015 Pop. Estimates"="WGT_SP"))  
 
-site1314 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "GNIS Name"="GNIS_NAME", "HUC8", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Major Basin Name"="MAJ_BAS_NM", 
-              "NARS_Name"="NARS_NAME", "Strahler Order"="STRAH_CAL", "Urban/NonUrban"="NRS13_URBN", "Weights for 1314 Pop. Estimates"="WGT_EXT_SP", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site1314 <- list(Empty=c("Add Site Info (optional)"=""),
+                 Local=c("County"="CNTYNAME", "Elevation"="ELEVATION", "GNIS Name"="GNIS_NAME", "HUC8", "Strahler Order"="STRAH_CAL", "Urban/NonUrban"="NRS13_URBN"),
+                 Regional=c("Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9",  "EPA Region"="EPA_REG", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "Major Basin Name"="MAJ_BAS_NM"),
+                 NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "NARS_Name"="NARS_NAME", "Weights for 1314 Pop. Estimates"="WGT_EXT_SP"))
 
-site2012 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "EPA Region"="EPA_REG", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
-              "Lake Origin"="LAKE_ORIGIN", "Lake Owner"="OWNSHP", "Major Basin Name"="MAJ_BASIN", "NES Lake"="NES_LAKE", "Site Type"="SITETYPE", "Size Class"="SIZE_CLASS", "Urban/NonUrban"="URBAN",  
-              "Weight Category"="WGT_CAT", "Weights for 2012 Pop. Estimates"="WGT_ALL", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site2012 <- list(Empty=c("Add Site Info (optional)"=""),
+                 Local=c("Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEVATION", "Feature Type"="DES_FTYPE", "GNIS Name"="GNIS_NAME", "HUC8",
+                         "Lake Origin"="LAKE_ORIGIN", "Lake Owner"="OWNSHP", "Site Type"="SITETYPE", "Size Class"="SIZE_CLASS", "Urban/NonUrban"="URBAN"),
+                 Regional=c("Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "EPA Region"="EPA_REG","Major Basin Number"="MAJ_BASIN"),
+                 NARS=c("NES Lake"="NES_LAKE", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Weight Category"="WGT_CAT", "Weights for 2012 Pop. Estimates"="WGT_ALL"))
 
-site2011 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "USACE Region"="COE_REGION", "County"="CNTYNAME", "EPA Region"="EPA_REG", "HUC12"="HUC12", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME", "LRR Name"="LRR_NAME", "LRR Symbol"="LRR_SYM", "MLRA Symbol"="MLRARSYM", "NEP Name"="NEP_NAME",  
-               "Unique ID"="UNIQUE_ID", "Wetland Class (Cowardin)"="WETCLS_EVL", "Wetland Class (HGM)"="WETCLS_HGM", "Weights for 2011 Pop. Estimates"="WGT_TP", "Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD")
+site2011 <- list(Empty=c("Add Site Info (optional)"=""),
+                 Local=c("County"="CNTYNAME", "HUC12"="HUC12", "LRR Name"="LRR_NAME", "LRR Symbol"="LRR_SYM", "MLRA Symbol"="MLRARSYM", "NEP Name"="NEP_NAME", "Wetland Class (Cowardin)"="WETCLS_EVL", "Wetland Class (HGM)"="WETCLS_HGM"),
+                 Regional=c("Aggr. Ecoregion 3"="AG_ECO3", "Aggr. Ecoregion 9"="AG_ECO9", "EPA Region"="EPA_REG", "USACE Region"="COE_REGION", "L3 Ecoregion"="US_L3NAME", "L4 Ecoregion"="US_L4NAME"),
+                 NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Unique ID"="UNIQUE_ID", "Weights for 2011 Pop. Estimates"="WGT_TP"))
 
-site2010 <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "NCA Region"="NCA_REGION", "NEP Name"="NEP_NM", "NPS Park"="NPSPARK", "RSRC Class"="RSRC_CLASS", "Province"="PROVINCE", "Station Depth"="STATION_DEPTH", "Waterbody Name"="WTBDY_NM")
+site2010 <- list(Empty=c("Add Site Info (optional)"=""),
+                 Local=c("NEP Name"="NEP_NM", "NPS Park"="NPSPARK", "RSRC Class"="RSRC_CLASS", "Station Depth"="STATION_DEPTH", "Waterbody Name"="WTBDY_NM"),
+                 Regional=c("EPA Region"="EPA_REG", "NCA Region"="NCA_REGION", "Province"="PROVINCE"))
 
-site0809 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "EPA Region"="EPA_REG", "HUC8", "Location Name"="LOC_NAME", "Strahler Order"="STRAHLERORDER", "Urban/NonUrban"="URBAN", 
-              "Watershed Area"="WSAREA_NARS", "Weights for 0809 Pop. Estimates"="WGTNRSA09")
+site0809 <- list(Empty=c("Add Site Info (optional)"=""),
+                 Local=c("HUC8", "Location Name"="LOC_NAME", "Strahler Order"="STRAHLERORDER", "Urban/NonUrban"="URBAN", "Watershed Area"="WSAREA_NARS"),
+                 Regional=c("Aggr. Ecoregion 3"="AGGR_ECO3_2015", "Aggr. Ecoregion 9"="AGGR_ECO9_2015", "EPA Region"="EPA_REG"),
+                 NARS=c("Weights for 0809 Pop. Estimates"="WGTNRSA09"))
 
-site2007 <- c("Add Site Info (optional)"="", "Aggr. Ecoregion 3"="WSA_ECO3", "Aggr. Ecoregion 9"="WSA_ECO9", "Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEV_PT", "EPA Region"="EPA_REG", "HUC8"="HUC_8", "Lake Name"="LAKENAME", "Lake Origin"="LAKE_ORIGIN", "NES Lake"="NESLAKE",  
-              "Lake Origin"="LAKE_ORIGIN", "Lake Perimeter"="LAKEPERIM", "Lake Max Depth"="DEPTHMAX", "Site Type"="SITETYPE", "Size Class"="SIZE_CLASS", "Urban/NonUrban"="URBAN", "Weights for 2007 Pop. Estimates"="WGT_NLA", "Albers XCOORD"="ALBERS_X", "Albers YCOORD"="ALBERS_Y")
+site2007 <- list(Empty=c("Add Site Info (optional)"=""),
+                 Local=c("Area (Hectares)"="AREA_HA", "County"="CNTYNAME", "Elevation"="ELEV_PT", "Lake Origin"="LAKE_ORIGIN", "Lake Perimeter"="LAKEPERIM", "Lake Max Depth"="DEPTHMAX", "Site Type"="SITETYPE", "Urban/NonUrban"="URBAN"),
+                 Regional=c("Aggr. Ecoregion 3"="WSA_ECO3", "Aggr. Ecoregion 9"="WSA_ECO9", "EPA Region"="EPA_REG", "HUC8"="HUC_8", "Lake Name"="LAKENAME", "Lake Origin"="LAKE_ORIGIN"),
+                 NARS=c("Albers XCOORD"="ALBERS_X", "Albers YCOORD"="ALBERS_Y", "NES Lake"="NESLAKE", "Size Class"="SIZE_CLASS", "Weights for 2007 Pop. Estimates"="WGT_NLA"))
 
-site0506 <- c("Add Site Info (optional)"="", "EPA Region"="EPA_REG", "Estuary"="ESTUARY", "NCA Region"="NCA_REGION")
-
-
-
+site0506 <- list(Empty=c("Add Site Info (optional)"=""),
+                 Local=c("Estuary"="ESTUARY"),
+                 Regional=c("EPA Region"="EPA_REG", "NCA Region"="NCA_REGION"))
 
 
 # EPA Template ----
@@ -342,6 +449,10 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                 useShinyjs(),
 	tags$head(
 	  tags$style(HTML("
+	               .optgroup-header {
+	                                  color: black !important;
+                                    font-weight: bold !important;}   
+	               
                   a.action-button {
                     color: #00ff00;}
                   
@@ -457,7 +568,20 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
                                                        input.Indicator !== 'siteinfo.revised.06212016' &
                                                        input.Indicator !== 'siteinfo_0' &
                                                        input.Indicator !== 'sampledlakeinformation_20091113' &
-                                                       input.Indicator !== 'siteinformationdata'",
+                                                       input.Indicator !== 'siteinformationdata' &
+                                                       
+                                                       input.Indicator !== 'condition_estimates' &
+                                                       input.Indicator !== 'plant_taxa' &
+                                                       input.Indicator !== 'plant_native_status' &
+                                                       input.Indicator !== 'plant_cvalues' &
+                                                       input.Indicator !== 'plant_wis' &
+                                          
+                                                       input.Indicator !== 'benthic_taxa_list' &
+                                                       input.Indicator !== 'phytoplankton_taxa' &
+                                                       input.Indicator !== 'zooplankton-taxa-list'",
+                                          
+                                                      
+                                          
                                           selectInput(inputId = "SiteInfo",
                                                       label = strong(HTML("Select Site Information <br/> to Add")),
                                                       choices = "",
@@ -775,31 +899,31 @@ server <-function(input, output, session) {
     }
   })
   
-  
   ## Data Title ----
   datatitle <- eventReactive(input$goButton, {
+    
     if(input$Year == "1819") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices1819)[choices1819 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset1819)[dataset1819 == input$Indicator])
     } else if(input$Year == "2017") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices2017)[choices2017 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset2017)[dataset2017 == input$Indicator])
     } else if(input$Year == "2016") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices2016)[choices2016 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset2016)[dataset2016 == input$Indicator])
     } else if(input$Year == "2015") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices2015)[choices2015 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset2015)[dataset2015 == input$Indicator])
     } else if(input$Year == "1314") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices1314)[choices1314 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset1314)[dataset1314 == input$Indicator])
     } else if(input$Year == "2012") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices2012)[choices2012 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset2012)[dataset2012 == input$Indicator])
     } else if(input$Year == "2011") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices2011)[choices2011 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset2011)[dataset2011 == input$Indicator])
     } else if(input$Year == "2010") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices2010)[choices2010 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset2010)[dataset2010 == input$Indicator])
     } else if(input$Year == "0809") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices0809)[choices0809 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset0809)[dataset0809 == input$Indicator])
     } else if(input$Year =="2007") {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices2007)[choices2007 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset2007)[dataset2007 == input$Indicator])
     } else {
-      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(choices0506)[choices0506 == input$Indicator])
+      paste0("Dataset: ", toupper(input$Survey), input$Year,"_", names(dataset0506)[dataset0506 == input$Indicator])
     }
   })
   
@@ -823,12 +947,14 @@ server <-function(input, output, session) {
     }
     if(input$Survey == "nrsa") {
       updateSelectInput(session, "Year", selected = NULL, choices = c("2018/2019"="1819", "2013/2014"="1314", "2008/2009"="0809"))
-    }})
+    }
+  })
   
   
   ## State Observers ----
   observe({
-    req("All States" %in% input$State) 
+    #req("All States" %in% input$State) 
+    req("All States" %in% input$State | input$Indicator %in% c("plant_cvalues", "plant_taxa", "plant_wis", "plant_native_status", "condition_estimates", "benthic_taxa_list", "phytoplankton_taxa","zooplankton-taxa-list"))
     updateSelectInput(session, "State", selected = "All States", 
                       choices = c("All States"))
   })
@@ -998,11 +1124,17 @@ server <-function(input, output, session) {
     if(input$Survey == "nla" & input$Year == "2017") {
       if(input$Indicator == "zooplankton-count") {
         Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-',input$Year,'-',input$Indicator,'-data.csv'))
-      } else if (input$Indicator %in% c("zooplankton-raw-count","zooplankton-metrics")) {
+      } else if (input$Indicator %in% c("zooplankton-raw-count","zooplankton-metrics","zooplankton-taxa-list")) {
         Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-',input$Year,'-',input$Indicator,'-data-updated-12092021.csv'))
+      } else if (input$Indicator %in% c("landMets")) {
+        Data <- read_csv(paste0("https://www.epa.gov/system/files/other-files/2022-07/",input$Survey,input$Year,'_',input$Indicator,".csv"))
+      } else if (input$Indicator == "condition_estimates") {
+        Data <- read_csv("https://www.epa.gov/system/files/other-files/2022-07/nla2017_condition_estimates_20220217_ForWebsite.csv")
+      } else if (input$Indicator == "data_for_population_estimates") {
+        Data <- read_csv("https://www.epa.gov/system/files/other-files/2022-07/nla2017_all_sites-visits_data_for_population_estimates_220705_0.csv")
       } else {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_',input$Year,'_',input$Indicator,'-data.csv'))
-      }
+      } 
       if(input$State != "All States" || length(input$State) > 1) {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
@@ -1010,6 +1142,8 @@ server <-function(input, output, session) {
         } else if("STATE" %in% colnames(Data)){
           Data <- Data %>%
             filter(STATE %in% input$State)
+        } else if(input$Indicator %in% c("benthic_taxa_list","phytoplankton_taxa","zooplankton-taxa-list", "condition_estimates")){ 
+          Data <- Data
         } else{
           siteinfo2017 <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/nla_2017_site_information-data.csv')) %>% 
             select(UID, SITE_ID, VISIT_NO, PSTL_CODE)
@@ -1017,7 +1151,7 @@ server <-function(input, output, session) {
             filter(PSTL_CODE %in% input$State) %>% relocate(PSTL_CODE, .after = VISIT_NO)
         }
       }
-      if(input$Indicator != "site_information") {
+      if(input$Indicator %!in% c("site_information", "benthic_taxa_list", "phytoplankton_taxa","zooplankton-taxa-list", "condition_estimates")) {
         siteinfo <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/nla_2017_site_information-data.csv')) %>%
           select(UID, LAT_DD83, LON_DD83, input$SiteInfo)
         Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = VISIT_NO)
@@ -1030,19 +1164,34 @@ server <-function(input, output, session) {
         Data <- read_csv("https://www.epa.gov/system/files/other-files/2022-04/nwca-2016-site-information-data_0.csv")
       } else if (input$Indicator == "plant-species-cover-height") {
         Data <- read_csv("https://www.epa.gov/system/files/other-files/2022-04/nwca-2016-plant-species-cover-height-data.csv")
+      } else if (input$Indicator %in% c("plant_cvalues", "plant_taxa", "plant_wis", "plant_native_status")) {   
+        Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-03/nwca_2016_',input$Indicator,'.csv'))
+      } else if (input$Indicator == "condition_estimates") {    
+        Data <- read_csv("https://www.epa.gov/system/files/other-files/2023-04/nwca_2016_condition_estimates.csv")
+      } else if (input$Indicator %in% c("aa_characterization")) {  
+        Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-03/nwca16_',input$Indicator,'_data.csv'))
+      } else if (input$Indicator %in% c("vegetation_type", "ground_surface")) {  
+        Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-03/nwca_2016_',input$Indicator,'_data.csv'))
+      } else if (input$Indicator %in% c("veg_mmi", "landscape_metrics", "plant_taxa")) {  
+        Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-03/nwca_2016_',input$Indicator,'.csv'))  
+      } else if (input$Indicator %in% c("cond_stress", "2011_data_for_population_estimates")) {  
+        Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-04/nwca_2016_',input$Indicator,'.csv')) 
       } else {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_',input$Year,'_',input$Indicator,'_-_data_csv.csv'))
       }
+      
       if(input$State != "All States" || length(input$State) > 1) {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
+        } else if (input$Indicator %in% c("plant_taxa", "plant_native_status", "plant_cvalues", "plant_wis", "condition_estimates")) { 
+          Data <- Data
         } else{
           Data <- Data %>%
             filter(STATE %in% input$State)
         }
       }
-      if(input$Indicator != "site-information") {
+      if(input$Indicator %!in% c("site-information", "plant_cvalues", "plant_taxa", "plant_wis", "plant_native_status", "condition_estimates")) {
         siteinfo <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2022-04/nwca-2016-site-information-data_0.csv')) %>%
           select(UID, LAT_ANALYS, LON_ANALYS, input$SiteInfo)
         Data <- left_join(Data, siteinfo) %>% relocate(LAT_ANALYS, LON_ANALYS, input$SiteInfo, .after = VISIT_NO)
@@ -1170,7 +1319,11 @@ server <-function(input, output, session) {
     }
     ### 2011----
     if(input$Survey == "nwca" & input$Year == "2011") {
+      if(input$Indicator == "siteinfo") {
+      Data <- read_csv('https://www.epa.gov/system/files/other-files/2023-04/nwca11_siteinfo.csv')
+      } else {
       Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2016-10/',input$Survey, input$Year,'_',input$Indicator,'.csv'))
+      }
       if(input$State != "All States" || length(input$State) > 1) {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
@@ -1179,16 +1332,16 @@ server <-function(input, output, session) {
           Data <- Data %>%
             filter(STATE %in% input$State)
         } else{
-          siteinfo2011 <- read_csv('https://www.epa.gov/sites/default/files/2016-10/nwca2011_siteinfo.csv') %>% 
+          siteinfo2011 <- read_csv('https://www.epa.gov/system/files/other-files/2023-04/nwca11_siteinfo.csv') %>% 
             select(UID, SITE_ID, VISIT_NO, STATE)
           Data <- left_join(Data, siteinfo2011) %>%
             filter(STATE %in% input$State) %>% relocate(STATE, .after = VISIT_NO)
         }
       }
       if(input$Indicator != "siteinfo") {
-        siteinfo <- read_csv(paste0('https://www.epa.gov/sites/default/files/2016-10/nwca2011_siteinfo.csv')) %>%
-          select(UID, AA_CENTER_LAT, AA_CENTER_LON, input$SiteInfo)
-        Data <- left_join(Data, siteinfo) %>% relocate(AA_CENTER_LAT, AA_CENTER_LON, input$SiteInfo, .after = VISIT_NO)
+        siteinfo <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2023-04/nwca11_siteinfo.csv')) %>%
+          select(UID, LAT_DD83, LON_DD83, input$SiteInfo)
+        Data <- left_join(Data, siteinfo) %>% relocate(LAT_DD83, LON_DD83, input$SiteInfo, .after = VISIT_NO)
       }
     }
     ### 2010----
@@ -1305,10 +1458,6 @@ server <-function(input, output, session) {
           select(SITE_ID, input$SiteInfo)
         Data <- left_join(Data, siteinfo) %>% relocate(input$SiteInfo, .after = SITE_ID)
       }
-      
-      
-      
-      
     } 
     
     remove_modal_spinner()
@@ -1388,12 +1537,17 @@ server <-function(input, output, session) {
       
       if(input$Indicator == "zooplankton-count") {
         MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-',input$Year,'-',input$Indicator,'-metadata.txt'))
-      } else if (input$Indicator %in% c("zooplankton-raw-count","zooplankton-metrics")) {
+      } else if (input$Indicator %in% c("zooplankton-raw-count","zooplankton-metrics","zooplankton-taxa-list")) {
         MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-',input$Year,'-',input$Indicator,'-metadata-updated-12092021.txt'))
+      } else if (input$Indicator == "landMets") {  
+        MetaData <- read.delim("https://www.epa.gov/system/files/other-files/2022-07/nla2017_landMets.txt")
+      } else if (input$Indicator == "condition_estimates") { 
+        MetaData <- read.delim("https://www.epa.gov/system/files/other-files/2023-01/nla2017_condition_estimates_metadata_220705.txt", stringsAsFactors = FALSE, fileEncoding = 'UTF-16LE')
+      } else if (input$Indicator == "data_for_population_estimates") { 
+        MetaData <- read.delim("https://www.epa.gov/system/files/other-files/2023-01/nla2017_metadata_for_population_estimates_220705.txt")
       } else {
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_',input$Year,'_',input$Indicator,'-metadata.txt'))
       }
-      
     }
     ### 2016----
     if(input$Survey == "nwca" & input$Year == "2016"){
@@ -1401,6 +1555,16 @@ server <-function(input, output, session) {
         MetaData <- read.delim("https://www.epa.gov/system/files/other-files/2022-04/nwca-2016-site-information-metadata_0.txt")
       } else if(input$Indicator == "plant-species-cover-height") {
         MetaData <- read.delim("https://www.epa.gov/system/files/other-files/2022-04/nwca-2016-plant-species-cover-height-metadata.txt")
+      } else if (input$Indicator %in% c("plant_taxa")) {  
+        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2023-03/nwca2016_',input$Indicator,'_metadata.txt'))
+      } else if (input$Indicator %in% c("aa_characterization")) {  
+        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2023-03/nwca16_',input$Indicator,'_metadata.txt'))
+      } else if (input$Indicator %in% c("vegetation_type", "ground_surface", "veg_mmi", "landscape_metrics", "plant_native_status", "plant_cvalues", "plant_wis")) {  
+        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2023-03/nwca_2016_',input$Indicator,'_metadata.txt'))
+      } else if (input$Indicator %in% c("2011_data_for_population_estimates", "condition_estimates")) {   
+        MetaData <- read.delim(paste0('https://www.epa.gov/system/files/other-files/2023-04/nwca_2016_',input$Indicator,'_metadata.txt'))
+      } else if (input$Indicator %in% c("cond_stress")) {   
+        MetaData <- read.delim('https://www.epa.gov/system/files/other-files/2023-04/nwca_2016_cond_stress.txt', stringsAsFactors = FALSE, fileEncoding = 'UTF-16LE')
       } else {
         MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_',input$Year,'_',input$Indicator,'_-_metadata_txt.txt'))
       }
@@ -1457,7 +1621,11 @@ server <-function(input, output, session) {
     }
     ### 2011----
     if(input$Survey == "nwca" & input$Year == "2011") {
-      MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2016-10/',input$Survey, input$Year,'_',input$Indicator,'-meta.txt'))
+      if(input$Indicator == "siteinfo") {
+        MetaData <- read.delim("https://www.epa.gov/system/files/other-files/2023-04/nwca11_siteinfo_metadata.txt")
+      } else {
+        MetaData <- read.delim(paste0('https://www.epa.gov/sites/production/files/2016-10/',input$Survey, input$Year,'_',input$Indicator,'-meta.txt'))
+      }
     }
     ### 2010----
     if(input$Survey == "ncca" & input$Year == "2010") {
