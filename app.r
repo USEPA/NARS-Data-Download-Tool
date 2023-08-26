@@ -202,7 +202,8 @@ site2011 <- list(Empty=c("Add Site Info (optional)"=""),
 
 site2010 <- list(Empty=c("Add Site Info (optional)"=""),
                  Local=c("NEP Name"="NEP_NM", "NPS Park"="NPSPARK", "RSRC Class"="RSRC_CLASS", "Station Depth"="STATION_DEPTH", "Waterbody Name"="WTBDY_NM"),
-                 Regional=c("EPA Region"="EPA_REG", "NCA Region"="NCA_REGION", "Province"="PROVINCE"))
+                 Regional=c("EPA Region"="EPA_REG", "NCA Region"="NCA_REGION", "Province"="PROVINCE"),
+                 NARS=c("Stratum"="STRATUM", "Weights for 2010 Pop. Estimates"="WGT_NCCA10"))
 
 site0809 <- list(Empty=c("Add Site Info (optional)"=""),
                  Local=c("HUC8", "Location Name"="LOC_NAME", "Strahler Order"="STRAHLERORDER", "Urban/NonUrban"="URBAN", "Watershed Area"="WSAREA_NARS"),
