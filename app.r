@@ -33,7 +33,7 @@ choices1819 <- list(`Site Information`=c("Landscape Data"="landscape", "Site Inf
                                  "Fish Sampling Info"="fish-sampling-information", "Fish Count"="fish-count", "Fish Metrics"="fish-metrics", "Periphyton Biomass"="pbio_0", "Periphyton/Chlorophyll a"="PeriChla"))
 choices2017 <- list(`Site Information`=c("Landscape Metrics"="landMets", "Site Information"="site_information"),
                     `Human Health`=c("E. Coli"="e.coli"),
-                     Chemical=c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Hydrographic Profile"="profile", "Sediment Chemistry"="sediment_chemistry","Water Chemistry/Chlorophyll a"="water_chemistry_chla"),
+                     Chemical=c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Hydrographic Profile"="profile", "Sediment Contaminants"="sediment_chemistry","Water Chemistry/Chlorophyll a"="water_chemistry_chla"),
                      Physical=c("Physical Habitat"="phab"),
                      Biological=c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Macroinvertebrate Metrics"="benthic_metrics", "Benthic Taxa List"="benthic_taxa_list",
                                   "Phytoplankton Count"="phytoplankton_count", "Phytoplankton Taxa List"="phytoplankton_taxa", "Secchi Depth"="secchi",  
@@ -53,10 +53,8 @@ choices2016 <- list(`Site Information`=c("Site Information"="site-information", 
 
 choices2015 <- list(`Site Information`=c("Site Information"="site_information"),
                     `Human Health`=c("Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs", "Microcystin"="microcystin"),
-                    Chemical=c("Hydrographic Profile"="hydrographic_profile","Secchi Depth"="secchi", "Sediment Chemistry"="sediment_chemistry", "Water Chemistry"="water_chemistry"),
-                    Physical=c(),
-                    Biological=c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminants"),
-                    NARS=c())
+                    Chemical=c("Hydrographic Profile"="hydrographic_profile","Secchi Depth"="secchi", "Sediment Contaminants"="sediment_chemistry", "Water Chemistry"="water_chemistry"),
+                    Biological=c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab Info"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminants"="ecological_fish_tissue_contaminants"))
 
 choices1314 <- list(`Site Information`=c("Site Information"="siteinformation_wide"),
                     `Human Health`=c("Enterococci"="ente", "Fish Tissue (Plugs)-Mercury"="fishplug_hg", "Microcystin"="micx"),
@@ -83,9 +81,8 @@ choices2011 <- list(`Site Information`=c("AA Characterization"="aachar", "Landsc
                      NARS=c("Indicator Conditions"="cond_stress"))
 
 choices2010 <- list(`Site Information`=c("Site Information"="siteinfo.revised.06212016"),
-                    Chemical=c("Hydrographic Profile"="hydrolab", "Sediment Chemistry"="sediment_chemistry.revised.06.21.2016", "Sediment Toxicity"="sediment_toxicity_results", "Water Chemistry"="waterchem"),
-                    Biological=c("Benthic Macroinvertebrates"="benthic_data", "ECOFISH Collection Info"="ecofish_collection_info", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminant_data"),
-                    NARS=c())
+                    Chemical=c("Hydrographic Profile"="hydrolab", "Sediment Contaminants"="sediment_chemistry.revised.06.21.2016", "Sediment Toxicity"="sediment_toxicity_results", "Water Chemistry"="waterchem"),
+                    Biological=c("Benthic Macroinvertebrates"="benthic_data", "ECOFISH Collection Info"="ecofish_collection_info", "ECOFISH Contaminants"="ecological_fish_tissue_contaminant_data"))
 
 choices0809 <- list(`Site Information`=c("Landscape Metrics"="land", "Site Information"="siteinfo_0"),
                     `Human Health`=c("Enterococci"="enterocond"),
@@ -102,7 +99,7 @@ choices2007 <- list(`Site Information`=c("Landscape Metrics"="basin_landuse_metr
                                  "Trophic Status"="trophic_conditionestimate_20091123", "Zooplankton Count"="zooplankton_count_20091022", "Zooplankton Sample Info"="zooplankton_sampleinformation_20091020"))
 
 choices0506 <- list(`Site Information`=c("Site Information"="siteinformationdata"),
-                    Chemical=c("Sediment Chemistry"="sedchemdata", "Water Chemistry"="waterchemdata"),
+                    Chemical=c("Sediment Contaminants"="sedchemdata", "Water Chemistry"="waterchemdata"),
                     Biological=c("Benthic Macroinvertebrates"="benthicdata"))
 
 
@@ -112,7 +109,7 @@ dataset1819 <- c("Algal Toxin"="algal_toxin", "Benthic Macroinvertebrate Count"=
                  "Landscape Data"="landscape", "Periphyton Biomass"="pbio_0", "Periphyton/Chlorophyll a"="PeriChla", "Physical Habitat Metrics"="physical_habitat_larger_set_of_metrics", "Site Information"="SiteInfo", "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
 
 dataset2017 <- c("Algal Toxin"="algal_toxin", "Atrazine"="atrazine", "Benthic Macroinvertebrate Count"="benthic_count", "Benthic Macroinvertebrate Metrics"="benthic_metrics", "Benthic Taxa List"="benthic_taxa_list", "Condition Estimates"="condition_estimates", "Data for Population Estimates"="data_for_population_estimates",
-                 "E. Coli"="e.coli", "Hydrographic Profile"="profile", "Landscape Metrics"="landMets", "Physical Habitat"="phab", "Phytoplankton Count"="phytoplankton_count", "Phytoplankton Taxa List"="phytoplankton_taxa", "Secchi Depth"="secchi", "Sediment Chemistry"="sediment_chemistry", 
+                 "E. Coli"="e.coli", "Hydrographic Profile"="profile", "Landscape Metrics"="landMets", "Physical Habitat"="phab", "Phytoplankton Count"="phytoplankton_count", "Phytoplankton Taxa List"="phytoplankton_taxa", "Secchi Depth"="secchi", "Sediment Contaminants"="sediment_chemistry", 
                  "Site Information"="site_information", "Water Chemistry/Chlorophyll a"="water_chemistry_chla", "Zooplankton Count"="zooplankton-count", "Zooplankton Count (Raw)"="zooplankton-raw-count", "Zooplankton Metrics"="zooplankton-metrics", "Zooplankton Taxa List"="zooplankton-taxa-list")
 
 
@@ -123,8 +120,8 @@ dataset2016 <- c("AA Characterization"="aa_characterization", "AA Hydrology USAC
                  "Stressor Condition"="cond_stress", "Surface Water Characterization"="surface_water_characterization",  "Tree Cover/Count"="tree_cover_count", "Vegetation MMI"="veg_mmi", "Vegetation Type"="vegetation_type",
                  "VegPlot Location"="veg_plot_location", "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
 
-dataset2015 <- c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminants", "Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs",  
-                 "Hydrographic Profile"="hydrographic_profile", "Microcystin"="microcystin", "Secchi Depth"="secchi", "Sediment Chemistry"="sediment_chemistry", "Site Information"="site_information", "Water Chemistry"="water_chemistry")
+dataset2015 <- c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab Info"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminants"="ecological_fish_tissue_contaminants", "Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs",  
+                 "Hydrographic Profile"="hydrographic_profile", "Microcystin"="microcystin", "Secchi Depth"="secchi", "Sediment Contaminants"="sediment_chemistry", "Site Information"="site_information", "Water Chemistry"="water_chemistry")
 
 dataset1314 <- c("Benthic Macroinvertebrate Count"="bentcnts", "Benthic Macroinvertebrate Metrics"="bentmet", "Benthic Macroinvertebrate MMI"="bentmmi", "Chlorophyll a"="widewchl", "Enterococci"="ente", "Field Chemistry"="wide_field_meas", 
                  "Fish Metrics"="fishmet", "Fish MMI"="fishmmi", "Fish Counts" = "fishcts", "Fish Tissue (Plugs)-Mercury"="fishplug_hg", "Indicator Condition"="key_var", "Microcystin"="micx", "Periphyton"="widepchl", "Periphyton Biomass"="widepbio", "Physical Habitat Metrics"="phabmed", 
@@ -140,8 +137,8 @@ dataset2011 <- c("AA Characterization"="aachar", "Algal Toxin"="algaltoxin", "Bu
                  "Soil Chemistry"="soilchem", "Soil Profile Descriptions"="soilprofhorizons", "Soil Profile Attributes" = "soilprofsum", "Tree Data"="tree", "USARAM Attributes"="usaram_attributes", "USARAM Summary"="usaram_summary", 
                  "Vegetation Metrics"="vegmetrics", "Vegetation MMI"="vegmmi", "Vegetation Plot Location"="vegplotloc", "Vegetation Type and Ground Surface"="vegtype_grndsurf", "Water Chemistry"="waterchem")
 
-dataset2010 <- c("Benthic Macroinvertebrates"="benthic_data", "ECOFISH Collection Info"="ecofish_collection_info", "ECOFISH Contaminant Index"="ecological_fish_tissue_contaminant_data", "Hydrographic Profile"="hydrolab", 
-                 "Sediment Chemistry"="sediment_chemistry.revised.06.21.2016", "Sediment Toxicity"="sediment_toxicity_results", "Site Information"="siteinfo.revised.06212016", "Water Chemistry"="waterchem")
+dataset2010 <- c("Benthic Macroinvertebrates"="benthic_data", "ECOFISH Collection Info"="ecofish_collection_info", "ECOFISH Contaminants"="ecological_fish_tissue_contaminant_data", "Hydrographic Profile"="hydrolab", 
+                 "Sediment Contaminants"="sediment_chemistry.revised.06.21.2016", "Sediment Toxicity"="sediment_toxicity_results", "Site Information"="siteinfo.revised.06212016", "Water Chemistry"="waterchem")
 
 dataset0809 <- c("Benthic Macroinvertebrate Count"="bentcts", "Benthic Macroinvertebrate MMI"="bentcond", "Enterococci"="enterocond", "Field Chemistry"="fieldchemmeasure", "Fish Metrics"="fishmet", "Fish MMI"="fishcond", "Fish Counts" = "fishcts", 
                  "Landscape Metrics"="land", "Physcial Habitat Metrics (Common)"="phablow", "Physical Habitat Metrics (Large)"="phabmed", "Site Information"="siteinfo_0", "Water Chemistry"="chem", "Water Chemistry Indicator"="chemcond")
@@ -153,7 +150,7 @@ dataset2007 <- c("Benthic Macroinvertebrate Condition"="bentcond_08232016", "Ben
                  "Trophic Status"="trophic_conditionestimate_20091123", "Water Chemistry Condition"="chemical_conditionestimates_20091123", "Water Isotope"="isotopes_wide", "Zooplankton Count"="zooplankton_count_20091022", 
                  "Zooplankton Sample Info"="zooplankton_sampleinformation_20091020")
 
-dataset0506 <- c("Benthic Macroinvertebrates"="benthicdata", "Sediment Chemistry"="sedchemdata", "Site Information"="siteinformationdata", "Water Chemistry"="waterchemdata")  
+dataset0506 <- c("Benthic Macroinvertebrates"="benthicdata", "Sediment Contaminants"="sedchemdata", "Site Information"="siteinformationdata", "Water Chemistry"="waterchemdata")  
 
 
 # siteinfo ----
@@ -178,11 +175,11 @@ site2016  <- list(Empty=c("Add Site Info (optional)"=""),
 site2015est <- list(Empty=c("Add Site Info (optional)"=""),
                     Local=c("Estuarine Group"="EST_GROUP", "Estuary Size"="SMALL_EST", "Feature Name"="FEAT_NM",  "NEP Name"="NEP_NAME", "Station Depth"="STATION_DEPTH"),
                     Regional=c("DWH Region"="DWH_REGION", "EPA Region"="EPA_REG", "NCCA Region"="NCCA_REG", "Province"="PROVINCE"),
-                    NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Stratum"="STRATUM", "Weights for 2015 Pop. Estimates"="WGT_SP"))
+                    NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Stratum"="STRATUM", "Unique ID"="UNIQUE_ID", "Weights for 2015 Pop. Estimates"="WGT_SP"))
 site2015gl <- list(Empty=c("Add Site Info (optional)"=""),
-                   Local=c("Feature Name"="FEAT_NM", "Great Lake"="GREAT_LAKE", "NPS Park"="NPS_PARK", "Station Depth"="STATION_DEPTH"),
+                   Local=c("Feature Name"="FEAT_NM", "Great Lake Name"="GREAT_LAKE", "NPS Name"="NPS_PARK", "Station Depth"="STATION_DEPTH"),
                    Regional=c("EPA Region"="EPA_REG", "Lake Region"="LAKE_REG", "NCCA Region"="NCCA_REG", "Province"="PROVINCE"),
-                   NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Stratum"="STRATUM", "Weights for 2015 Pop. Estimates"="WGT_SP"))  
+                   NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Stratum"="STRATUM", "Unique ID"="UNIQUE_ID", "Weights for 2015 Pop. Estimates"="WGT_SP"))  
 
 site1314 <- list(Empty=c("Add Site Info (optional)"=""),
                  Local=c("County"="CNTYNAME", "Elevation"="ELEVATION", "GNIS Name"="GNIS_NAME", "HUC8", "Strahler Order"="STRAH_CAL", "Urban/NonUrban"="NRS13_URBN"),
@@ -201,8 +198,8 @@ site2011 <- list(Empty=c("Add Site Info (optional)"=""),
                  NARS=c("Albers XCOORD"="XCOORD", "Albers YCOORD"="YCOORD", "Unique ID"="UNIQUE_ID", "Weights for 2011 Pop. Estimates"="WGT_TP"))
 
 site2010 <- list(Empty=c("Add Site Info (optional)"=""),
-                 Local=c("NEP Name"="NEP_NM", "NPS Park"="NPSPARK", "RSRC Class"="RSRC_CLASS", "Station Depth"="STATION_DEPTH", "Waterbody Name"="WTBDY_NM"),
-                 Regional=c("EPA Region"="EPA_REG", "NCA Region"="NCA_REGION", "Province"="PROVINCE"),
+                 Local=c("NEP Name"="NEP_NM", "NPS Name"="NPSPARK", "Resource Class"="RSRC_CLASS", "Station Depth"="STATION_DEPTH", "Waterbody Name"="WTBDY_NM"),
+                 Regional=c("EPA Region"="EPA_REG", "NCCA Region"="NCCR_REG", "Province"="PROVINCE"),
                  NARS=c("Stratum"="STRATUM", "Weights for 2010 Pop. Estimates"="WGT_NCCA10"))
 
 site0809 <- list(Empty=c("Add Site Info (optional)"=""),
@@ -217,7 +214,9 @@ site2007 <- list(Empty=c("Add Site Info (optional)"=""),
 
 site0506 <- list(Empty=c("Add Site Info (optional)"=""),
                  Local=c("Estuary"="ESTUARY"),
-                 Regional=c("EPA Region"="EPA_REG", "NCA Region"="NCA_REGION"))
+                 Regional=c("EPA Region"="EPA_REG", "NCA Region"="NCA_REGION"),
+                 NARS=c("Weights for 99-01 Pop. Estimates"="WGT_NCA_91", "Weights for 05-06 Pop. Estimates"="WGT_NCA_56"))
+
 
 
 # EPA Template ----
