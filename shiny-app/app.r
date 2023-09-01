@@ -53,7 +53,7 @@ choices2016 <- list(`Site Information`=c("Site Information"="site-information", 
 
 choices2015 <- list(`Site Information`=c("Site Information"="site_information"),
                     `Human Health`=c("Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs", "Microcystin"="microcystin"),
-                    Chemical=c("Hydrographic Profile"="hydrographic_profile","Secchi Depth"="secchi", "Sediment Contaminants"="sediment_chemistry", "Water Chemistry"="water_chemistry"),
+                    Chemical=c("Hydrographic Profile"="hydrographic_profile","Secchi Depth"="secchi", "Sediment Contaminants"="sediment_chemistry", "Sediment Toxicity (Replicate)"="sediment_toxicity_sample_replicate", "Water Chemistry"="water_chemistry"),
                     Biological=c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab Info"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminants"="ecological_fish_tissue_contaminants"))
 
 choices1314 <- list(`Site Information`=c("Site Information"="siteinformation_wide"),
@@ -121,7 +121,7 @@ dataset2016 <- c("AA Characterization"="aa_characterization", "AA Hydrology USAC
                  "VegPlot Location"="veg_plot_location", "Water Chemistry/Chlorophyll a"="water_chemistry_chla")
 
 dataset2015 <- c("Benthic Macroinvertebrate Count"="benthic_count", "Benthic Grab Info"="benthic_grab", "ECOFISH Fish Collection "="ecological-fish-tissue-contaminants-fish-collection", "ECOFISH Contaminants"="ecological_fish_tissue_contaminants", "Enterococci"="enterococci", "Fish Tissue (Plugs)-Mercury"="mercury_in_fish_tissue_plugs",  
-                 "Hydrographic Profile"="hydrographic_profile", "Microcystin"="microcystin", "Secchi Depth"="secchi", "Sediment Contaminants"="sediment_chemistry", "Site Information"="site_information", "Water Chemistry"="water_chemistry")
+                 "Hydrographic Profile"="hydrographic_profile", "Microcystin"="microcystin", "Secchi Depth"="secchi", "Sediment Contaminants"="sediment_chemistry", "Sediment Toxicity (Replicates)"="sediment_toxicity_sample_replicate", "Site Information"="site_information", "Water Chemistry"="water_chemistry")
 
 dataset1314 <- c("Benthic Macroinvertebrate Count"="bentcnts", "Benthic Macroinvertebrate Metrics"="bentmet", "Benthic Macroinvertebrate MMI"="bentmmi", "Chlorophyll a"="widewchl", "Enterococci"="ente", "Field Chemistry"="wide_field_meas", 
                  "Fish Metrics"="fishmet", "Fish MMI"="fishmmi", "Fish Counts" = "fishcts", "Fish Tissue (Plugs)-Mercury"="fishplug_hg", "Indicator Condition"="key_var", "Microcystin"="micx", "Periphyton"="widepchl", "Periphyton Biomass"="widepbio", "Physical Habitat Metrics"="phabmed", 
