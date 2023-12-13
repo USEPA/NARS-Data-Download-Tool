@@ -218,7 +218,6 @@ site0506 <- list(Empty=c("Add Site Info (optional)"=""),
                  NARS=c("Weights for 99-01 Pop. Estimates"="WGT_NCA_91", "Weights for 05-06 Pop. Estimates"="WGT_NCA_56"))
 
 
-
 # EPA Template ----
 
 ui <- fluidPage(tags$html(class = "no-js", lang="en"),
@@ -821,7 +820,7 @@ ui <- fluidPage(tags$html(class = "no-js", lang="en"),
               </li>
             </ul>
             <p class="footer__last-updated">
-              Last updated on February 02, 2023
+              Last updated on August 29, 2023
             </p>
           </div>
         </div>
@@ -1094,7 +1093,7 @@ server <-function(input, output, session) {
         }
       
     
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1135,7 +1134,7 @@ server <-function(input, output, session) {
       } else {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_',input$Year,'_',input$Indicator,'-data.csv'))
       } 
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1180,7 +1179,7 @@ server <-function(input, output, session) {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_',input$Year,'_',input$Indicator,'_-_data_csv.csv'))
       }
       
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1207,7 +1206,7 @@ server <-function(input, output, session) {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2021-04/',input$Survey,'_',input$Year,'_',input$Indicator,'_',input$NCCA_Type,'-data.csv')) %>% 
                            filter(!grepl('(blank)', UID)) %>% mutate(UID=as.numeric(UID))
       }
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1242,7 +1241,7 @@ server <-function(input, output, session) {
       if(input$Indicator %in% c("key_var")) {
         Data <- read_csv(paste0('https://www.epa.gov/sites/default/files/2019-05/nrsa1314_allcond_05312019_0.csv'))
       }
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1291,7 +1290,7 @@ server <-function(input, output, session) {
       } else {#"zooplankton-raw-count"
         Data <- read_csv(paste0('https://www.epa.gov/system/files/other-files/2021-12/',input$Survey,'-',input$Year,'-',input$Indicator,'-data.csv'))
       }
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1324,7 +1323,7 @@ server <-function(input, output, session) {
       } else {
       Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2016-10/',input$Survey, input$Year,'_',input$Indicator,'.csv'))
       }
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1353,7 +1352,7 @@ server <-function(input, output, session) {
       } else {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2016-01/assessed_',input$Survey, input$Year,'_',input$Indicator,'.csv'))
       }
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1382,7 +1381,7 @@ server <-function(input, output, session) {
       } else {
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2015-09/',input$Indicator,'.csv'))
       }
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1420,7 +1419,7 @@ server <-function(input, output, session) {
         #Phytoplankton, Physical Habitat, Secchi, waterchem, trophic, zooplankton
         Data <- read_csv(paste0('https://www.epa.gov/sites/production/files/2014-10/',input$Survey, input$Year,'_',input$Indicator,'.csv'))
       }
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         if("PSTL_CODE" %in% colnames(Data)) {
           Data <- Data %>%
             filter(PSTL_CODE %in% input$State)
@@ -1447,7 +1446,7 @@ server <-function(input, output, session) {
     ### 1999-2001/2005-2006----
     if(input$Survey == "ncca" & input$Year == "1999-2001/2005-2006") {
       Data <- read_csv(paste0("https://www.epa.gov/system/files/other-files/2023-03/nca_", input$Indicator,'.csv'))
-      if(input$State != "All States" || length(input$State) > 1) {
+      if(length(input$State) > 1 || input$State != "All States") {
         Data <- Data %>%
           filter(PSTL_CODE %in% input$State)
       }
