@@ -1,7 +1,7 @@
 # NARS Data Download Tool
 *Current version: 1.0.0 Last updated: 3/20/2022
 ## How to Launch the Tool
-* To launch the tool locally, click the green 'Code' button and download the zip file which contains the code repository. Open the <b>app.R</b> file in RStudio for local app deployment. RStudio will recognize the Shiny script and provide a Run App button at the top of the editor pane (look for the green play triangle).
+* Please visit: https://rconnect-public.epa.gov/nars-data-download. To launch the tool locally, click the green 'Code' button and download the zip file which contains the code repository. Open the <b>app.R</b> file in RStudio for local app deployment. RStudio will recognize the Shiny script and provide a Run App button at the top of the editor pane (look for the green play triangle).
 
 ## Overview
 This R Shiny app presents an easy-to-use user interface for exploring and downloading available datasets collected in the National Aquatic Resource Surveys (NARS). These data are housed at the [NARS Data web page](https://www.epa.gov/national-aquatic-resource-surveys/data-national-aquatic-resource-surveys). Users have the ability to explore available datasets and the option to filter the data by state(s) of interest and join site information to selected datasets. Users of the data are encouraged to review the [Technical Reports, Field and Laboratory Manuals, and metadata files](https://www.epa.gov/national-aquatic-resource-surveys/outreach-materials-national-aquatic-resource-surveys) to understand the types of data available and how they were collected or measured. Users are also encouraged to read and leverage the EPA survey reports developed from these data that highlight national and regional assessments.
